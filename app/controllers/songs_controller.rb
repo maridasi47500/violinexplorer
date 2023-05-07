@@ -1,6 +1,12 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: %i[ show edit update destroy ]
-
+  before_action :set_song, only: %i[ show edit update destroy myurl]
+  def myurl
+    @k=1
+    while Dir.glob("#{Rails.root.to_s}/public/uploads/**#{@song.myfilename}recording**").any?{|y|y.include?(@song.myfilename+"recording"+@k.to_s)} do
+      @k+=1
+    end
+    `wget "#{params[:recording]}" -o "#{Rails.root.to_s}/public/uploads/#{@song.myfile}recording#{@k}.ogg"`
+  end
   # GET /songs or /songs.json
   def index
     @songs = Song.all

@@ -210,7 +210,7 @@ input[type=checkbox]:checked ~ aside {
         <% @xx.select{|h|h.include?(@song.myfilename+"recording")}.each do |h|%>
 
 
-          <article class="clip"><audio controls="" src="/uploads/<%=h.split("/")[-1]%>"></audio><p>My unnamed clip</p><button class="delete">Delete</button></article>
+          <article class="clip <%=h.split("/")[-1].split(".")[..-2].join("")%>"><audio controls="" src="/uploads/<%=h.split("/")[-1]%>"></audio><p>My unnamed clip</p><button class="delete">Delete</button></article>
         <%end%>
 
 
@@ -259,9 +259,9 @@ input[type=checkbox]:checked ~ aside {
 <%end%>
 <%end%>
 
-<%if Dir.glob(Rails.root.to_s+"/public/uploads/**.mp4").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
+<%if Dir.glob(Rails.root.to_s+"/public/uploads/**video.mp4").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
  <video width="320" height="240" controls>
-   <source src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp4" type="video/mp4">
+   <source src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>video.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
 <%end%>
@@ -346,7 +346,7 @@ startButton.addEventListener(
         let recordedBlob = new Blob(recordedChunks, { type: "video/mp4" });
         recording.src = URL.createObjectURL(recordedBlob);
         downloadButton.href = recording.src;
-        downloadButton.download = "<%=@song.title.parameterize+@song.artist.parameterize+"recording"%>.mp4";
+        downloadButton.download = "<%=@song.title.parameterize+@song.artist.parameterize+"recording"%>video.mp4";
 
         log(
           `Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`
@@ -448,7 +448,7 @@ if (navigator.mediaDevices.getUserMedia) {
       clipContainer.appendChild(audio);
       clipContainer.appendChild(clipLabel);
       clipContainer.appendChild(deleteButton);
-      soundClips.appendChild(clipContainer);
+
 
       audio.controls = true;
       var mymimetype;
@@ -493,12 +493,18 @@ if (navigator.mediaDevices.getUserMedia) {
       clipTelecharger.href=audio.src;
       clipTelecharger.innerHTML="Télécharger";
       clipTelecharger.classList.add('telecharger');
+
       var y=1,nom="<%=@song.title.parameterize+@song.artist.parameterize%>recording";
-      while(document.querySelector("."+nom+String(y))){
+      var hh=soundClips.children.length;
+      while(soundClips.children && soundClips.children[0] && !soundClips.children[(hh - 1)].classList.contains(nom+String(y))){
+
         y=y+1;
       }
+      y=y+1;
+      clipContainer.classList.add(nom+String(y));
+      soundClips.appendChild(clipContainer);
       clipTelecharger.classList.add(nom+String(y));
-      clipTelecharger.download=nom+String(y);
+      clipTelecharger.download=nom+String(y)+".mp3";
       soundClips.appendChild(clipTelecharger);
       console.log("recorder stopped");
 
@@ -594,4 +600,5 @@ window.onresize = function() {
 }
 
 window.onresize();
+
 </script>
