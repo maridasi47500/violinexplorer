@@ -5,3 +5,8 @@ body,a,a:visited,a:hover,a:link {
 color:white;
 background:black;
 }
+a,a:visited,a:hover,a:link {
+color:white;
+background:black;
+font-size: 18px;
+}
