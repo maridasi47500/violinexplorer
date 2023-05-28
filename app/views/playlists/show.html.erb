@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @playlist.title %>
+</p>
+<ul>
+<%@playlist.pieces.each do |p|%>
+<li><%=p.title%></li>
+<%end%>
+</ul>
+
+<%= link_to 'Edit', edit_playlist_path(@playlist) %> |
+<%= link_to 'Back', playlists_path %>

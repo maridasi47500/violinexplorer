@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :playlists
+  resources :pieces
   #devise_for :users
   resources :songs
   post "/myurl/:id", to: "songs#myurl"
