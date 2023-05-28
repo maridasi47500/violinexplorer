@@ -6,6 +6,13 @@ else
 all
 end
 end
+def self.mystyle(x,asc)
+if x == "1"
+order(:style => asc)
+else 
+all
+end
+end
 def self.mydate(x,asc)
 if x == "1"
 order(:date => asc)
