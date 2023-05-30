@@ -41,7 +41,7 @@
 <%@song.recordings.each do |x|%>
 <div class="mysound">
 <p class="mycontent"><%=x.mycontent%></p>
-   <audio class="mysong1" controls>
+   <audio class="mysong1" controls  preload="none">
   <source  src="/uploads/<%=x.filename%>" type="audio/wav">
   Your browser does not support the audio tag.
 </audio>
@@ -66,7 +66,7 @@
 <%if Dir.glob(Rails.root.to_s+"/public/uploads/**.mp3").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize+".mp3")}%>
 
 
-   <audio id="mysong" controls>
+   <audio  preload="none" id="mysong" controls>
   <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
   Your browser does not support the audio tag.
 </audio>
@@ -79,7 +79,7 @@
 <%if Dir.glob(Rails.root.to_s+"/public/uploads/**accompaniment**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
 
 
-   <audio id="mysong" controls>
+   <audio  preload="none" id="mysong" controls>
   <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
   Your browser does not support the audio tag.
 </audio>
@@ -92,7 +92,7 @@
 <%if Dir.glob(Rails.root.to_s+"/public/uploads/**partie**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
 
 
-   <audio id="mysong" controls>
+   <audio  preload="none" id="mysong" controls>
   <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
   Your browser does not support the audio tag.
 </audio>
