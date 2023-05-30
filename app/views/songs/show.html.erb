@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
+<div id="myid"><%=@song.id%></div>
+
 <p id="log"></p>
+<%=content_for :title do%>
+<%=@song.title%>
+<%end%>
 
 <style>
 
@@ -11,79 +16,91 @@
   -
   <%= @song.artist %>
 </p>
+      <header>
+
+        <h1>Web dictaphone</h1>
+	<div id="controls">
+		<img id="record" src="/img/mic128.png" onclick="toggleRecording(this);">
+<form id="myform"><textarea name="mycontent"></textarea> </form>
+		<a id="save" href="#"><img src="/img/save.svg"></a>
+	</div>
+
+
+      </header>
    <div class="wrapper">
 
-      <header>
-        <h1>Web dictaphone</h1>
-      </header>
 
-      <section class="main-controls">
-        <canvas class="visualizer" height="60px"></canvas>
-        <div id="buttons">
-          <button class="record">Record</button>
-          <button class="stop">Stop</button>
-        </div>
-      </section>
-
-      <section class="sound-clips">
-        <%@a=1%>
-        <%@xx=Dir.glob(Rails.root.to_s+"/public/uploads/**recording**")%>
-        <% @xx.select{|h|h.include?(@song.myfilename+"recording")}.each do |h|%>
+<div id="viz">
+		<canvas id="analyser" width="1024" height="50"></canvas>
+		<canvas id="wavedisplay" width="1024" height="50"></canvas>
+	</div>
 
 
-          <article class="clip <%=h.split("/")[-1].split(".")[..-2].join("")%>"><audio controls="" >
-          <source type="audio/mp3" src="/uploads/<%=h.split("/")[-1]%>">
+      <section class="list-mysound-clip">
+<div style="width:<%=30+@song.recordings.length* 100%>px;" class="div2">
+<%@song.recordings.each do |x|%>
+<div class="mysound">
+<p class="mycontent"><%=x.mycontent%></p>
+   <audio class="mysong1" controls>
+  <source  src="/uploads/<%=x.filename%>" type="audio/wav">
   Your browser does not support the audio tag.
+</audio>
+</div>
+<%end%>
+</div>
+      </section>
+      <section class="sound-clips">
+        <%#@a=1%>
+        <%#@xx=Dir.glob(Rails.root.to_s+"/public/uploads/**recording**")%>
+        <%# @xx.select{|h|h.include?(@song.myfilename+"recording")}.each do |h|%>
 
-</audio><p>My unnamed clip</p><button class="delete">Delete</button></article>
-        <%end%>
+        <%#end%>
 
 
       </section>
     </div>
 
 
-<%if user_signed_in?%>
+<div class="accompaniment">
+  <h4>accompagnement</h4>
 <%if Dir.glob(Rails.root.to_s+"/public/uploads/**.mp3").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize+".mp3")}%>
-  <h4>musique</h4>
+
 
    <audio id="mysong" controls>
   <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
   Your browser does not support the audio tag.
 </audio>
-<%else%>
+<%end%>
   <%=form_with model: @song do |form|%>
     <%=form.file_field :myfile%>
     <%=form.submit "ajouter le morceau"%>
   <%end%>
-<%end%>
-<%if Dir.glob(Rails.root.to_s+"/public/uploads/**accompaniment**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
   <h4>accompagnement</h4>
+<%if Dir.glob(Rails.root.to_s+"/public/uploads/**accompaniment**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
+
 
    <audio id="mysong" controls>
   <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
   Your browser does not support the audio tag.
 </audio>
-<%else%>
+<%end%>
   <%=form_with model: @song do |form|%>
     <%=form.file_field :myfile2%>
     <%=form.submit "ajouter l'accompagnement"%>
   <%end%>
-<%end%>
-<%if Dir.glob(Rails.root.to_s+"/public/uploads/**partie**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
   <h4>partie</h4>
+<%if Dir.glob(Rails.root.to_s+"/public/uploads/**partie**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
+
 
    <audio id="mysong" controls>
   <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
   Your browser does not support the audio tag.
 </audio>
-<%else%>
+<%end%>
   <%=form_with model: @song do |form|%>
     <%=form.file_field :myfile3%>
     <%=form.submit "ajouter la partie"%>
   <%end%>
-<%end%>
-<%end%>
 
 <%if Dir.glob(Rails.root.to_s+"/public/uploads/**video.mp4").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
  <video width="320" height="240" controls>
@@ -91,6 +108,7 @@
 Your browser does not support the video tag.
 </video>
 <%end%>
+</div>
 <div class="left">
   <div id="startButton" class="button">Start Recording</div>
   <h2>Preview</h2>
@@ -115,7 +133,7 @@ let stopButton = document.getElementById("stopButton");
 let downloadButton = document.getElementById("downloadButton");
 let logElement = document.getElementById("log");
 
-let recordingTimeMS = 5000;
+let recordingTimeMS = 120000;
 
 function log(msg) {
   logElement.innerHTML += `${msg}\n`;
@@ -195,236 +213,5 @@ stopButton.addEventListener(
   },
   false
 );
-
-</script>
-  <script>
-
-const record = document.querySelector('.record');
-const stop1 = document.querySelector('.stop');
-const soundClips = document.querySelector('.sound-clips');
-const canvas = document.querySelector('.visualizer');
-const mainSection = document.querySelector('.main-controls');
-
-// disable stop button while not recording
-
-stop1.disabled = true;
-
-// visualiser setup - create web audio api context and canvas
-
-let audioCtx;
-const canvasCtx = canvas.getContext("2d");
-
-//main block for doing the audio recording
-
-if (navigator.mediaDevices.getUserMedia) {
-  console.log('getUserMedia supported.');
-
-  const constraints = { audio: true };
-  let chunks = [];
-
-  let onSuccess = function(stream) {
-    const mediaRecorder = new MediaRecorder(stream);
-
-    visualize(stream);
-
-    record.onclick = function() {
-      mediaRecorder.start();
-      console.log(mediaRecorder.state);
-      console.log("recorder started");
-      record.style.background = "red";
-
-      stop1.disabled = false;
-      record.disabled = true;
-    }
-
-    stop1.onclick = function() {
-      mediaRecorder.stop();
-      console.log(mediaRecorder.state);
-      console.log("recorder stopped");
-      record.style.background = "";
-      record.style.color = "";
-      // mediaRecorder.requestData();
-
-      stop1.disabled = true;
-      record.disabled = false;
-    }
-
-    mediaRecorder.onstop = function(e) {
-      console.log("data available after MediaRecorder.stop() called.");
-
-      const clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
-
-      const clipContainer = document.createElement('article');
-      const clipTelecharger = document.createElement('a');
-      const clipLabel = document.createElement('p');
-      const audio = document.createElement('audio');
-      const deleteButton = document.createElement('button');
-
-      clipContainer.classList.add('clip');
-      audio.setAttribute('controls', '');
-      deleteButton.textContent = 'Delete';
-      deleteButton.className = 'delete';
-
-      if(clipName === null) {
-        clipLabel.textContent = 'My unnamed clip';
-      } else {
-        clipLabel.textContent = clipName;
-      }
-
-      clipContainer.appendChild(audio);
-      clipContainer.appendChild(clipLabel);
-      clipContainer.appendChild(deleteButton);
-
-
-      audio.controls = true;
-      var mymimetype;
-      var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-
-// Firefox 1.0+
-      var isFirefox = typeof InstallTrigger !== 'undefined';
-      
-      // Safari 3.0+ "[object HTMLElementConstructor]"
-      var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
-      
-      // Internet Explorer 6-11
-      var isIE = /*@cc_on!@*/false || !!document.documentMode;
-      
-      // Edge 20+
-      var isEdge = !isIE && !!window.StyleMedia;
-      
-      // Chrome 1 - 79
-      var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
-      
-      // Edge (based on chromium) detection
-      var isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1);
-      
-      // Blink engine detection
-      var isBlink = (isChrome || isOpera) && !!window.CSS;
-      if (isFirefox) {
-        mymimetype="audio/peg";
-      }  else if (isChrome) {
-        mymimetype="audio/mp3";
-      }  else if (isOpera) {
-        mymimetype="audio/mp3";
-      }  else if (isIE) {
-        mymimetype="audio/mpeg";
-      }else {
-        mymimetype="audio/mpeg";
-
-      }
-      const blob = new Blob(chunks, { 'type' : mymimetype+'; codecs=opus' });
-      chunks = [];
-      const audioURL = window.URL.createObjectURL(blob);
-      audio.src = audioURL;
-      clipTelecharger.href=audio.src;
-      clipTelecharger.innerHTML="Télécharger";
-      clipTelecharger.classList.add('telecharger');
-
-      var y=1,nom="<%=@song.title.parameterize+@song.artist.parameterize%>recording";
-      var hh=soundClips.children.length;
-      while(soundClips.children && soundClips.children[0] && !soundClips.children[(hh - 1)].classList.contains(nom+String(y))){
-
-        y=y+1;
-      }
-      y=y+1;
-      clipContainer.classList.add(nom+String(y));
-      soundClips.appendChild(clipContainer);
-      clipTelecharger.classList.add(nom+String(y));
-      clipTelecharger.download=nom+String(y)+".mp3";
-      soundClips.appendChild(clipTelecharger);
-      console.log("recorder stopped");
-
-      deleteButton.onclick = function(e) {
-        e.target.closest(".clip").remove();
-      }
-
-      clipLabel.onclick = function() {
-        const existingName = clipLabel.textContent;
-        const newClipName = prompt('Enter a new name for your sound clip?');
-        if(newClipName === null) {
-          clipLabel.textContent = existingName;
-        } else {
-          clipLabel.textContent = newClipName;
-        }
-      }
-    }
-
-    mediaRecorder.ondataavailable = function(e) {
-      chunks.push(e.data);
-    }
-  }
-
-  let onError = function(err) {
-    console.log('The following error occured: ' + err);
-  }
-
-  navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
-
-} else {
-   console.log('getUserMedia not supported on your browser!');
-}
-
-function visualize(stream) {
-  if(!audioCtx) {
-    audioCtx = new AudioContext();
-  }
-
-  const source = audioCtx.createMediaStreamSource(stream);
-
-  const analyser = audioCtx.createAnalyser();
-  analyser.fftSize = 2048;
-  const bufferLength = analyser.frequencyBinCount;
-  const dataArray = new Uint8Array(bufferLength);
-
-  source.connect(analyser);
-  //analyser.connect(audioCtx.destination);
-
-  draw()
-
-  function draw() {
-    const WIDTH = canvas.width
-    const HEIGHT = canvas.height;
-
-    requestAnimationFrame(draw);
-
-    analyser.getByteTimeDomainData(dataArray);
-
-    canvasCtx.fillStyle = 'rgb(200, 200, 200)';
-    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-
-    canvasCtx.lineWidth = 2;
-    canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
-
-    canvasCtx.beginPath();
-
-    let sliceWidth = WIDTH * 1.0 / bufferLength;
-    let x = 0;
-
-
-    for(let i = 0; i < bufferLength; i++) {
-
-      let v = dataArray[i] / 128.0;
-      let y = v * HEIGHT/2;
-
-      if(i === 0) {
-        canvasCtx.moveTo(x, y);
-      } else {
-        canvasCtx.lineTo(x, y);
-      }
-
-      x += sliceWidth;
-    }
-
-    canvasCtx.lineTo(canvas.width, canvas.height/2);
-    canvasCtx.stroke();
-
-  }
-}
-
-window.onresize = function() {
-  canvas.width = mainSection.offsetWidth;
-}
-
-window.onresize();
 
 </script>

@@ -23,7 +23,7 @@ style
 </div>
 <div>
 <%=form.label "styleasc", "style ordre ascendant "%>
-<%=form.radio_button :styleasc, "asc"%>
+<%=form.radio_button :styleasc, "asc",selected:(params["styleasc"] =="asc" || !params["styleasc"] )%>
 </div>
 <div>
 <%=form.label "styleasc", "style ordre descendant"%>

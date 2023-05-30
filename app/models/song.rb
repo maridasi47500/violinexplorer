@@ -1,4 +1,6 @@
 class Song < ApplicationRecord
+has_many :recordings
+has_many :videos
   def myfile=(uploaded_io)
     myfilename=self.title.parameterize+self.artist.parameterize+"."+uploaded_io.original_filename.split(".")[-1]
     File.open(Rails.root.join('public', 'uploads', myfilename), 'wb') do |file|

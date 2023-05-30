@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  post 'audio/save/:id', to: "audio#save"
+  resources :myfiles
   resources :playlists
   resources :pieces
   #devise_for :users

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Violinexplorer</title>
+    <title><%=yield :title%>Violinexplorer</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 <link rel="stylesheet" href="/assets/<%=params[:controller]%>.css"/>
@@ -13,5 +13,8 @@
     <a href="/auth/login">connexion/inscription</a>
     <%= yield %>
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<script src="/js/audiodisplay.js"></script>
+	<script src="/js/recorderjs/recorder.js"></script>
+	<script src="/js/main.js"></script>
   </body>
 </html>

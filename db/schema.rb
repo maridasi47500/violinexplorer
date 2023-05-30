@@ -10,7 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_07_170240) do
+ActiveRecord::Schema.define(version: 2023_05_29_221434) do
+
+  create_table "myfiles", force: :cascade do |t|
+    t.string "filename"
+    t.integer "song_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "type"
+  end
+
+  create_table "pieces", force: :cascade do |t|
+    t.integer "tempo"
+    t.integer "date"
+    t.string "title"
+    t.string "composer"
+    t.integer "length"
+    t.string "style"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "playlistpieces", force: :cascade do |t|
+    t.integer "playlist_id"
+    t.integer "piece_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "playlists", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "songs", force: :cascade do |t|
     t.string "artist"

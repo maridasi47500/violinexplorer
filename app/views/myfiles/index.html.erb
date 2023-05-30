@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Myfiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Filename</th>
+      <th>Song</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @myfiles.each do |myfile| %>
+      <tr>
+        <td><%= myfile.filename %></td>
+        <td><%= myfile.song_id %></td>
+        <td><%= link_to 'Show', myfile %></td>
+        <td><%= link_to 'Edit', edit_myfile_path(myfile) %></td>
+        <td><%= link_to 'Destroy', myfile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Myfile', new_myfile_path %>

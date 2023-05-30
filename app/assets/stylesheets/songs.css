@@ -169,3 +169,40 @@ width:100%;
   and (orientation: landscape) { 
 
 }
+textarea { 
+width:100%; 
+height:128px; 
+} 
+#myform,#record,#save{ 
+ 
+float:left; 
+ 
+height:100%; 
+} 
+#myform{ 
+display:inline; 
+}
+.accompaniment{
+display:block;
+float:left;
+clear:both;
+}
+
+.list-mysound-clip .mysound{
+height:100px;
+width:100px;
+float:left;
+display:inline;
+}
+.div2{
+margin:10px;
+
+width:100000px;
+display:block;
+height:100%;
+}
+.list-mysound-clip{
+width:100vw;
+height:100px;
+overflow-x:scroll;
+}
