@@ -14,15 +14,24 @@
   <tbody>
     <% @recordings.each do |recording| %>
       <tr>
-        <td><%= recording.filename %></td>
-        <td><%= recording.song_id %></td>
+        <td><audio  preload="none" class="mysong" controls>
+  <source  src="/uploads/<%= recording.filename %>" type="audio/wav">
+  Your browser does not support the audio tag.
+</audio></td>
+        <td><%= recording.song.displayname %></td>
         <td><%= link_to 'Show', recording %></td>
         <td><%= link_to 'Edit', edit_recording_path(recording) %></td>
-        <td><%= link_to 'Destroy', recording, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%if @recordings.precedent(params[:page])%>
+<%=link_to "<", recordings_path(page: @recordings.precedent(params[:page]))%>
+<%end%>
+<%if @recordings.suivant(params[:page])%>
+<%=link_to ">", recordings_path(page: @recordings.suivant(params[:page]))%>
+<%end%>
 
 <br>
 

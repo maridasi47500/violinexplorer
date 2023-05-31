@@ -1,0 +1,17 @@
+<%=content_for :title do%><%=@song.title%> recordings - <%end%>      <section class="list-mysound-clip">
+<div style="width:<%=30+@song.recordings.length* 100%>px;" class="div2">
+<%@song.recordings.each do |x|%>
+<div class="mysound">
+<p class="mycontent"><%=x.mycontent%></p>
+   <audio class="mysong1" controls  preload="none">
+  <source  src="/uploads/<%=x.filename%>" type="audio/wav">
+  Your browser does not support the audio tag.
+</audio>
+</div>
+<%end%>
+</div>
+</section>
+
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Back', songs_path %>
+

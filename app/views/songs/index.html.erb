@@ -1,6 +1,37 @@
 <p id="notice"><%= notice %></p>
-<%=link_to "pieces",pieces_path%>
-<%=link_to "playlists",playlists_path%>
+<h1>Recordings</h1>
+<%if params[:page].to_i == 0%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Filename</th>
+      <th>Song</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recordings.each do |recording| %>
+      <tr>
+        <td> <audio  preload="none" id="mysong" controls>
+  <source  src="/uploads/<%= recording.filename %>" type="audio/wav">
+  Your browser does not support the audio tag.
+</audio></td>
+        <td><%= recording.song.title %> - <%=recording.song.artist%></td>
+        <td><%= link_to 'voir cet enregistrement', recording %></td>
+        <td><%= link_to 'enregistrer un autre de celui-là', recording.song %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%=link_to "voir tous les enregistrements",recordings_path%>
+
+
+
+<%end%>
 
 <h1>Songs</h1>
 
@@ -25,6 +56,12 @@
     <% end %>
   </tbody>
 </table>
+<%if @songs.precedent(params[:page])%>
+<%=link_to "<",songs_path(page: @songs.precedent(params[:page]))%>
+<%end%>
+<%if @songs.suivant(params[:page])%>
+<%=link_to ">", songs_path(page: @songs.suivant(params[:page]))%>
+<%end%>
 
 <br>
 

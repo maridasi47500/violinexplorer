@@ -3,7 +3,11 @@ class RecordingsController < ApplicationController
 
   # GET /recordings or /recordings.json
   def index
-    @recordings = Recording.all
+    @recordings = Recording.all.page(params[:page])
+    if params[:page].to_i <= 1
+      params[:page]=nil
+    end
+
   end
 
   # GET /recordings/1 or /recordings/1.json

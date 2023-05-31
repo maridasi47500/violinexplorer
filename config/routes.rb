@@ -2,9 +2,14 @@ Rails.application.routes.draw do
   post 'audio/save/:id', to: "audio#save"
   resources :myfiles
   resources :playlists
+  resources :recordings
   resources :pieces
   #devise_for :users
-  resources :songs
+  resources :songs do
+    member do
+      get "recordings"
+    end
+  end
   post "/myurl/:id", to: "songs#myurl"
   root to: "songs#index"
   devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }

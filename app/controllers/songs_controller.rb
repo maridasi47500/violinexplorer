@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: %i[ show edit update destroy myurl]
+  before_action :set_song, only: %i[ show edit update destroy myurl recordings]
   def myurl
     @k=1
     while Dir.glob("#{Rails.root.to_s}/public/uploads/**#{@song.myfilename}recording**").any?{|y|y.include?(@song.myfilename+"recording"+@k.to_s)} do
@@ -9,7 +9,12 @@ class SongsController < ApplicationController
   end
   # GET /songs or /songs.json
   def index
-    @songs = Song.all
+    @songs = Song.all.page(params[:page])
+    if params[:page].to_i <= 1
+      params[:page]=nil
+    end
+      
+    @recordings = Recording.recent
   end
 
   # GET /songs/1 or /songs/1.json

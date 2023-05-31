@@ -1,13 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Filename:</strong>
-  <%= @recording.filename %>
+ <audio  preload="none" id="mysong" controls>
+  <source  src="/uploads/<%= @recording.filename %>" type="audio/wav">
+  Your browser does not support the audio tag.
+</audio>
 </p>
 
 <p>
-  <strong>Song:</strong>
-  <%= @recording.song_id %>
+  <strong>Song: <%=@recording.song.title %> - <%=@recording.song.artist%></strong>
+<%= button_to 'supprimer cet enregistrement', @recording, method: :delete, data: { confirm: 'Are you sure?' } %>
 </p>
 
 <%= link_to 'Edit', edit_recording_path(@recording) %> |
