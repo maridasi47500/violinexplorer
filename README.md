@@ -1,24 +1,13 @@
 # README
+rails 6 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- avant de lancer le projet faire
 
-Things you may want to cover:
 
-* Ruby version
+```
+mkdir public/uploads
+```
 
-* System dependencies
+========!!!!!! explore le violon (ou ton instrument de musique) avec des vidéos et des enregistrements !!!!======
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+~~~~~~> enregistre toi et ajoute ton accompagnement  pour jouer et t'enregistrer

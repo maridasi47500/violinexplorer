@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%=yield :title%>Violinexplorer</title>
+    <title><%=yield :title%> <%=(yield :title).length > 0 ? " - " : "" %>The Violin explorer</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 <link rel="stylesheet" href="/assets/<%=params[:controller]%>.css"/>
