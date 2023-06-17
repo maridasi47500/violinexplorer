@@ -1,10 +1,15 @@
 class Song < ApplicationRecord
+has_many :recordings
+has_many :videos
+def self.numberrecordings
+select("*").select("songs.*, (select count(myfiles.id) from myfiles where songs.id = myfiles.song_id) as nbrec").group("songs.id").order("nbrec desc")
+end
 def self.page(x)
 k=x.to_i
-if k = 0
-offset(1).limit(10)
+if k == 0
+select("*,songs.id as id").offset(0).limit(11)
 else
-offset(k.to_i).limit(10)
+select("*, songs.id as id").offset(k.to_i).limit(10)
 end
 end
 def self.suivant(x)
@@ -29,8 +34,7 @@ end
 end
 
 
-has_many :recordings
-has_many :videos
+
   def displayname
     title + " - " + artist
   end

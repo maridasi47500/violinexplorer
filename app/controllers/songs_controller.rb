@@ -9,7 +9,9 @@ class SongsController < ApplicationController
   end
   # GET /songs or /songs.json
   def index
-    @songs = Song.all.page(params[:page])
+    @songs = Song.page(params[:page]).numberrecordings
+    @songsprecedent = Song.numberrecordings.precedent(params[:page])
+    @songssuivant = Song.numberrecordings.suivant(params[:page])
     if params[:page].to_i <= 1
       params[:page]=nil
     end

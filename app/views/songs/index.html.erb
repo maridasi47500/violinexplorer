@@ -7,6 +7,8 @@
     <tr>
       <th>Filename</th>
       <th>Song</th>
+      <th>downlod</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +20,9 @@
   <source  src="/uploads/<%= recording.filename %>" type="audio/wav">
   Your browser does not support the audio tag.
 </audio></td>
+<td>
+<a id="save" href="/uploads/<%= recording.filename %>" download="<%=recording.filename%>.wav"><img src="/img/save.svg"></a>
+</td>
         <td><%= recording.song.title %> - <%=recording.song.artist%></td>
         <td><%= link_to 'voir cet enregistrement', recording %></td>
         <td><%= link_to 'enregistrer un autre de celui-là', recording.song %></td>
@@ -40,6 +45,7 @@
     <tr>
       <th>Artist</th>
       <th>Title</th>
+      <th>number of recordings</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -49,6 +55,7 @@
       <tr>
         <td><%= song.artist %></td>
         <td><%= song.title %></td>
+        <td><%= song.nbrec %></td>
         <td><%= link_to 'Show', song %></td>
         <td><%= link_to 'Edit', edit_song_path(song) %></td>
         <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -56,11 +63,11 @@
     <% end %>
   </tbody>
 </table>
-<%if @songs.precedent(params[:page])%>
-<%=link_to "<",songs_path(page: @songs.precedent(params[:page]))%>
+<%if @songsprecedent%>
+<%=link_to "<",songs_path(page: @songsprecedent)%>
 <%end%>
-<%if @songs.suivant(params[:page])%>
-<%=link_to ">", songs_path(page: @songs.suivant(params[:page]))%>
+<%if @songssuivant%>
+<%=link_to ">", songs_path(page: @songssuivant)%>
 <%end%>
 
 <br>

@@ -47,12 +47,16 @@ function gotBuffers( buffers ) {
 }
 
 function doneEncoding( blob ) {
-    //Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
+    Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
+    if (!($("#playit")[0])){
+      $("#controls").append("<audio id=\"playit\" src=\"\" controls></audio>");
+    }
+    document.getElementById("playit").src=document.getElementById("save").href;
     recIndex++;
     var url=URL.createObjectURL(blob);
     var recordingblog=null;
     var formData=new FormData($("#myform")[0]);
-    var recording=new Blob([blob],{type:"audio/wav"});
+    var recording=new Blob([blob]);
     formData.append("recording",recording);
     $.ajax({type:"POST",url:"/audio/save/"+$("#myid").html(),
     processData: false,

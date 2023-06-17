@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'video/save/:id', to: 'video#save'
   post 'audio/save/:id', to: "audio#save"
   resources :myfiles
   resources :playlists
