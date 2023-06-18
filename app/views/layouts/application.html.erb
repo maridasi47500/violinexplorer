@@ -19,8 +19,6 @@
 </nav>
     <%= yield %>
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-<script src="/js/audiodisplay.js"></script>
-	<script src="/js/recorderjs/recorder.js"></script>
-	<script src="/js/main.js"></script>
+<%=yield :js%>
   </body>
 </html>

@@ -1,0 +1,204 @@
+<p id="notice"><%= notice %></p>
+<div id="myid" hidden><%=@song.id%></div>
+
+<p id="log"></p>
+<%=content_for :title do%>
+<%=@song.title%>
+<%end%>
+
+
+<p>
+  <%= @song.artist %>
+</p>
+      <header>
+
+        <h1>
+<%=@song.title%></h1>
+<form id="myvideoform"> </form>
+<div>
+
+
+<div class="left">
+<div id="myvideo">🎥</div>
+
+  <div id="startButton" class="button">Start Recording</div>
+  <h2>Preview</h2>
+  <video id="preview" width="160" height="120" autoplay muted></video>
+</div>
+<div class="right">
+  <div id="stopButton" class="button">Stop Recording</div>
+  <h2>Recording</h2>
+  <video id="recording" width="160" height="120" controls></video>
+  <a id="downloadButton" class="button"> Download </a>
+</div>
+</div>
+
+
+
+
+<div class="accompaniment">
+  <h4>accompagnement</h4>
+<%if Dir.glob(Rails.root.to_s+"/public/uploads/**.mp3").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize+".mp3")}%>
+
+
+   <audio  preload="none" id="mysong" controls>
+  <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
+  Your browser does not support the audio tag.
+</audio>
+<%end%>
+  <%=form_with model: @song do |form|%>
+    <%=form.file_field :myfile%>
+    <%=form.submit "ajouter le morceau"%>
+  <%end%>
+  <h4>accompagnement</h4>
+<%if Dir.glob(Rails.root.to_s+"/public/uploads/**accompaniment**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
+
+
+   <audio  preload="none" id="mysong" controls>
+  <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
+  Your browser does not support the audio tag.
+</audio>
+<%end%>
+  <%=form_with model: @song do |form|%>
+    <%=form.file_field :myfile2%>
+    <%=form.submit "ajouter l'accompagnement"%>
+  <%end%>
+  <h4>partie</h4>
+<%if Dir.glob(Rails.root.to_s+"/public/uploads/**partie**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
+
+
+   <audio  preload="none" id="mysong" controls>
+  <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
+  Your browser does not support the audio tag.
+</audio>
+<%end%>
+  <%=form_with model: @song do |form|%>
+    <%=form.file_field :myfile3%>
+    <%=form.submit "ajouter la partie"%>
+  <%end%>
+
+<%if Dir.glob(Rails.root.to_s+"/public/uploads/**video.mp4").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
+ <video width="320" height="240" controls>
+   <source src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>video.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<%end%>
+</div>
+
+
+
+
+<%= link_to 'Enregistrer', song_path(@song) %> |
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Back', songs_path %>
+<%=content_for :js do%>
+<script>
+  let preview = document.getElementById("preview");
+let recording = document.getElementById("recording");
+let startButton = document.getElementById("startButton");
+let stopButton = document.getElementById("stopButton");
+let downloadButton = document.getElementById("downloadButton");
+let logElement = document.getElementById("log");
+  let myvideo=document.getElementById("myvideo");
+
+let recordingTimeMS = 120000;
+
+function log(msg) {
+  logElement.innerHTML += `${msg}\n`;
+}
+
+
+function wait(delayInMS) {
+  return new Promise((resolve) => setTimeout(resolve, delayInMS));
+}
+function startRecording(stream, lengthInMS) {
+
+  myvideo.classList.add("recording");
+  let recorder = new MediaRecorder(stream);
+  let data = [];
+
+  recorder.ondataavailable = (event) => data.push(event.data);
+  recorder.start();
+  log(`${recorder.state} for ${lengthInMS / 1000} seconds…`);
+
+  let stopped = new Promise((resolve, reject) => {
+    recorder.onstop = resolve;
+    recorder.onerror = (event) => reject(event.name);
+  });
+
+  let recorded = wait(lengthInMS).then(() => {
+    if (recorder.state === "recording") {
+      recorder.stop();
+
+    }
+  });
+
+  return Promise.all([stopped, recorded]).then(() => data);
+}
+
+function stop(stream) {
+
+  stream.getTracks().forEach((track) => track.stop());
+}
+
+startButton.addEventListener(
+  "click",
+  () => {
+    navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.mediaDevices.getUserMedia);
+    navigator.mediaDevices
+      .getUserMedia({
+        video: true,
+        audio: true,
+      })
+      .then((stream) => {
+        preview.srcObject = stream;
+        downloadButton.href = stream;
+        preview.captureStream =
+          preview.captureStream || preview.mozCaptureStream;
+        return new Promise((resolve) => (preview.onplaying = resolve));
+      })
+      .then(() => startRecording(preview.captureStream(), recordingTimeMS))
+      .then((recordedChunks) => {
+        let recordedBlob = new Blob(recordedChunks, { type: "video/mp4" });
+    myvideo.classList.remove("recording");
+    var formData=new FormData($("#myvideoform")[0]);
+    var recording=new Blob([recordedBlob]);
+    formData.append("recording",recording);
+    $.ajax({type:"POST",url:"/video/save/"+$("#myid").html(),
+    processData: false,
+    contentType: false,
+       data: formData
+     });
+
+        recording.src = URL.createObjectURL(recordedBlob);
+        downloadButton.href = recording.src;
+        downloadButton.download = "<%=@song.title.parameterize+@song.artist.parameterize+"recording"%>video.mp4";
+
+        log(
+          `Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`
+        );
+
+      })
+      .catch((error) => {
+        if (error.name === "NotFoundError") {
+          log("Camera or microphone not found. Can't record.");
+        } else {
+          log(error);
+        }
+      });
+  },
+  false
+);
+stopButton.addEventListener(
+  "click",
+  () => {
+    myvideo.classList.remove("recording");
+    stop(preview.srcObject);
+
+
+  },
+  false
+);
+
+</script>
+<%end%>

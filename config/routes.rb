@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :songs do
     member do
       get "recordings"
+      get "vids"
     end
   end
   post "/myurl/:id", to: "songs#myurl"
