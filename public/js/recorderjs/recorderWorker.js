@@ -36,7 +36,8 @@ this.onmessage = function(e){
     case 'exportMonoWAV':
       exportMonoWAV(e.data.type);
       break;
-    case 'getBuffers':
+
+        case 'getBuffers':
       getBuffers();
       break;
     case 'clear':

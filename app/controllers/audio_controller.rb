@@ -8,6 +8,6 @@ class AudioController < ApplicationController
   end
   private
   def myparams
-    params.permit(:recording,:mycontent)
+    params.permit(:recording,:mycontent,:accompaniment_id,:partonly)
   end
 end

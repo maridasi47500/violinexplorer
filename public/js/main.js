@@ -58,6 +58,9 @@ function doneEncoding( blob ) {
     var formData=new FormData($("#myform")[0]);
     var recording=new Blob([blob]);
     formData.append("recording",recording);
+    formData.append("accompaniment_id",$("[name=myaccomp]:checked").val());
+    formData.append("partonly",($("[name=recordpart]")[0].checked ? "1" : "0"));
+   
     $.ajax({type:"POST",url:"/audio/save/"+$("#myid").html(),
     processData: false,
     contentType: false,
@@ -69,8 +72,13 @@ function toggleRecording( e ) {
     if (e.classList.contains("recording")) {
         // stop recording
         audioRecorder.stop();
+        
         e.classList.remove("recording");
         audioRecorder.getBuffers( gotBuffers );
+        try{
+            
+
+            window.myaccompaniment.pause();}catch(e){console.log(e);}
     } else {
         // start recording
         if (!audioRecorder)
@@ -78,6 +86,15 @@ function toggleRecording( e ) {
         e.classList.add("recording");
         audioRecorder.clear();
         audioRecorder.record();
+        try{
+        console.log($("#myaccompaniment"+String($("[name=myaccomp]:checked")[0].value))[0].src);
+        window.myaccompaniment=$("#myaccompaniment"+String($("[name=myaccomp]:checked")[0].value))[0].parentElement;
+        window.myaccompaniment.currentTime = 0;
+        window.myaccompaniment.setSinkId($("#my_devices_output").val());
+            window.myaccompaniment.play();
+    }catch(e){console.log(e);
+    }
+    
     }
 }
 
@@ -178,22 +195,48 @@ function initAudio() {
             navigator.cancelAnimationFrame = navigator.webkitCancelAnimationFrame || navigator.mozCancelAnimationFrame;
         if (!navigator.requestAnimationFrame)
             navigator.requestAnimationFrame = navigator.webkitRequestAnimationFrame || navigator.mozRequestAnimationFrame;
-
-    navigator.getUserMedia(
-        {
+/*  {
             "audio": {
                 "mandatory": {
                     "googEchoCancellation": "false",
                     "googAutoGainControl": "false",
                     "googNoiseSuppression": "false",
-                    "googHighpassFilter": "false"
+                    "googHighpassFilter": "false",
+                    "deviceId": $("#my_devices").val(),
                 },
+                
                 "optional": []
+            },*/
+    navigator.getUserMedia(
+        {
+            "audio": {
+                    "deviceId": $("#my_devices").val(),
+                
             },
         }, gotStream, function(e) {
             alert('Error getting audio');
             console.log(e);
         });
+        if (!navigator.mediaDevices?.enumerateDevices) {
+  console.log("enumerateDevices() not supported.");
+} else {
+  // List cameras and microphones.
+  navigator.mediaDevices
+    .enumerateDevices()
+    .then((devices) => {
+      devices.forEach((device) => {
+                  $("#my_devices").prepend("<option value=\""+String(device.deviceId)+"\">"+String(device.kind)+" "+String(device.label)+"</option>")
+                  $("#my_devices_output").prepend("<option value=\""+String(device.deviceId)+"\">"+String(device.kind)+" "+String(device.label)+"</option>")
+
+        console.log(`${device.kind}: ${device.label} id = ${device.deviceId}`);
+      });
+    })
+    .catch((err) => {
+      console.error(`${err.name}: ${err.message}`);
+    });
+    $("#my_devices").val($("#toselect").html())
+}
+        
 }
 
 window.addEventListener('load', initAudio );
