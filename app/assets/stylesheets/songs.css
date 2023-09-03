@@ -205,11 +205,16 @@ float:left;
 clear:both;
 }
 
-.list-mysound-clip .mysound{
-height:100px;
-width:100px;
-float:left;
-display:inline;
+.list-mysound-clip .mysound {
+    /* height: 100%; */
+    width: 100px;
+    float: left;
+    /* display: block; */
+    clear: both;
+}
+input#recordpart {
+    position: relative;
+    top: 0;
 }
 .div2{
 margin:10px;
@@ -220,10 +225,28 @@ height:100%;
 }
 .list-mysound-clip{
 width:100vw;
-height:100px;
+height:100vh;
 overflow-x:scroll;
 }
 table,body {
 text-align:center;
 display:block;
+}
+
+#text{
+
+    null: ;
+    undefined: ;
+    width: 219px;
+    display: block;
+    z-index: 200;
+    position: absolute;
+    margin: auto;
+    transform: translateX(30vw);
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 100px;
+    vertical-align: middle;
+
 }

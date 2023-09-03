@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :mymessages
+  resources :votes
   post 'video/save/:id', to: 'video#save'
   post 'audio/save/:id', to: "audio#save"
   resources :myfiles

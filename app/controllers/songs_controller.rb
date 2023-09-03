@@ -22,15 +22,16 @@ class SongsController < ApplicationController
 
   # GET /songs/1 or /songs/1.json
   def show
+    @mymessages=Mymessage.all
     if params[:my_devices] && params[:my_devices].length > 0
       session["my_devices"]||=[]
-      session["my_devices"].push(params["my_devices"])
+      session["my_devices"].push(params["my_devices"]) if !session["my_devices"].include?(params["my_devices"])
       @my_devices=session["my_devices"] 
       
     end
     if params[:my_devices_output] && params[:my_devices_output].length > 0
       session["my_devices"]||=[]
-      session["my_devices"].push(params["my_devices_output"])
+      session["my_devices"].push(params["my_devices_output"]) if !session["my_devices"].include?(params["my_devices_output"])
       @my_devices=session["my_devices"] 
       
     end

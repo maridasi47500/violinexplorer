@@ -1,8 +1,10 @@
 <%=content_for :title do%><%=@song.title%> recordings - <%end%>      <section class="list-mysound-clip">
 <div style="width:<%=30+@song.recordings.length* 100%>px;" class="div2">
 <%@song.recordings.each do |x|%>
-    <%if x.partonly%>
-        <button onclick="myaccomp<%=x.id%>.play();mypart<%=x.id%>.pause();">
+    <%begin%>
+    <%if x.partonly %>
+    <div class="mysound">
+        <button onclick="myaccomp<%=x.id%>.play();mypart<%=x.id%>.play();">
       play
     </button>
     
@@ -17,6 +19,7 @@
   <source  src="/uploads/<%=x.filename%>" type="audio/wav">
   Your browser does not support the audio tag.
 </audio>
+    </div>
     <%else%>
 <div class="mysound">
 <p class="mycontent"><%=x.mycontent%></p>
@@ -25,6 +28,9 @@
   Your browser does not support the audio tag.
 </audio>
 </div>
+    <%end%>
+     <%rescue => e%>
+    <%=e.message%>
     <%end%>
 <%end%>
 </div>
