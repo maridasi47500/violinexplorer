@@ -1,0 +1,652 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mixers</h1>
+
+<div class="mixer">
+  <section class="ctrlroom">
+ctrl room
+    <a class="linein ctrl_out_l"></a>
+    <a class="linein ctrl_out_r"></a>
+  </section>
+  <section class="my2track">
+    <a class="linein 2tr_out_l"></a>
+    <a class="linein 2tr_out_r"></a>
+2 track
+    <a class="linein 2tr_in_l"></a>
+    <a class="linein 2tr_in_r"></a>
+  </section>
+  <section class="channel channel1">
+      <ul class="volume-bars">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>   
+    </ul> 
+    <input class="volume" value="50" type="range" />
+    <input class="volume" value="50" type="range" />
+    <p>MASTER</p> 
+    <a class="active master-btn"></a>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>   
+    </ul> 
+    <input class="slider master" value="50" type="range" />
+  </section>
+  <section class="regie">
+fx send
+    <a class="linein fxsen"></a>
+phones
+    <a class="linein phones"></a>
+main out
+    <a class="linein main_out_l"></a>
+    <a class="linein main_out_r"></a>
+  </section>
+  <section class="maregie">
+<%5.upto(12) do |x|%>
+<span>
+line in <%=x%>
+    <a class="linein linein<%=x%>"></a>
+    <div class="gain" rotate-attribute="0deg"></div>
+gain
+</span>
+<%end%>
+  </section>
+
+ <%1.upto(4).each do |linein|%> 
+
+  <section class="channel">
+    <a class="mic"></a>
+mic
+    <a class="linein"></a>
+line in
+    <div class="gain"  rotate-attribute="0deg"></div>
+gain
+<hr>
+    <div class="low"  rotate-attribute="0deg"></div>
+low
+    <div class="mid" rotate-attribute="0deg"></div>
+mid
+    <div class="high" rotate-attribute="0deg"></div>
+high
+    <a class="low eq"></a>
+low eq
+    <div class="fx" rotate-attribute="0deg"></div>
+fx
+    <div class="ban" rotate-attribute="0deg"></div>
+ban
+    <div class="level" rotate-attribute="0deg"></div>
+level
+
+    <p>CH-<%=linein%></p>
+    <%if linein == 3%><h4>HDB-600</h4><%end%>
+  </section>
+  <%end%>
+ <%(5..11).step(2).each do |linein|%> 
+
+  <section class="channel">
+
+<hr>
+    <a class="low eq"></a>
+low eq
+    <div class="fx" rotate-attribute="0deg"></div>
+fx
+    <div class="ban" rotate-attribute="0deg"></div>
+ban
+    <div class="level" rotate-attribute="0deg"></div>
+level
+
+    <p>CH-<%=linein%>/<%=linein+1%></p>
+    <%if linein == 3%><h4>HDB-600</h4><%end%>
+  </section>
+  <%end%>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+</div>
+
+
+<br>
+<form id="triangleform" hidden onsubmit="event.preventDefault(); doSolve();" onreset="doClearOutputs();">
+			<table class="onesoln" id="formtable" style="margin-left:auto; margin-right:auto">
+				<thead>
+					<tr>
+						<th>Variable</th>
+						<th>Input</th>
+						<th style="min-width:8em">Solution</th>
+						<th style="min-width:8em"><span>Solution 2</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label for="sideAin">Side <var>a</var> (units):</label></td>
+						<td><input type="number" min="0" step="any" autocomplete="off" id="sideAin" oninput="doSolve();"/></td>
+						<td id="sideAout"></td>
+						<td id="sideAout2"></td>
+					</tr>
+					<tr>
+						<td><label for="sideBin">Side <var>b</var> (units):</label></td>
+						<td><input type="number" min="0" step="any" autocomplete="off" id="sideBin" oninput="doSolve();"/></td>
+						<td id="sideBout"></td>
+						<td id="sideBout2"></td>
+					</tr>
+					<tr>
+						<td><label for="sideCin">Side <var>c</var> (units):</label></td>
+						<td><input type="number" min="0" step="any" autocomplete="off" id="sideCin" oninput="doSolve();"/></td>
+						<td id="sideCout"></td>
+						<td id="sideCout2"></td>
+					</tr>
+					<tr>
+						<td><label for="angleAin">Angle <var>A</var> (degrees):</label></td>
+						<td><input type="number" min="0" step="any" autocomplete="off" id="angleAin" oninput="doSolve();"/></td>
+						<td id="angleAout"></td>
+						<td id="angleAout2"></td>
+					</tr>
+					<tr>
+						<td><label for="angleBin">Angle <var>B</var> (degrees):</label></td>
+						<td><input type="number" min="0" step="any" autocomplete="off" id="angleBin" oninput="doSolve();"/></td>
+						<td id="angleBout"></td>
+						<td id="angleBout2"></td>
+					</tr>
+					<tr>
+						<td><label for="angleCin">Angle <var>C</var> (degrees):</label></td>
+						<td><input type="number" min="0" step="any" autocomplete="off" id="angleCin" oninput="doSolve();"/></td>
+						<td id="angleCout"></td>
+						<td id="angleCout2"></td>
+					</tr>
+					<tr>
+						<td>Area (square units):</td>
+						<td></td>
+						<td id="areaout"></td>
+						<td id="areaout2"></td>
+					</tr>
+					<tr>
+						<td>Status:</td>
+						<td colspan="3" id="status"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td colspan="3">
+							<button type="submit">Solve</button>
+							<button type="reset">Clear</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+
+<%= link_to 'New Mixer', new_mixer_path %>
+	<div style="position:relative;display:none;">
+			<div id="diagramcontainer" style="width:32em; margin:0em auto; position:relative">
+				<svg style="display:block; width:100%" viewBox="0 0 18000 9000" fill="none" stroke="none">
+					<path stroke="#000000" stroke-width="100" stroke-linejoin="round" d="M1160,7405L16964,7405,6522,914,1160,7405Z"/>
+					<g fill="#000000">
+						<path d="M9266,7960l-84,286l-9,35c-1,4,-1,7,-1,9c0,4,1,7,3,10c3,2,5,3,8,3c5,0,14,-4,24,-13c4,-4,14,-17,31,-40l15,8c-21,37,-42,64,-65,81c-23,17,-48,26,-75,26c-16,0,-29,-4,-37,-13c-9,-8,-13,-19,-13,-32c0,-11,5,-32,14,-62l11,-35c-34,57,-66,98,-97,121c-18,14,-37,21,-57,21c-26,0,-45,-11,-57,-32c-12,-22,-18,-47,-18,-74c0,-40,12,-87,37,-139c25,-52,58,-95,98,-126c34,-27,65,-40,94,-40c16,0,29,5,39,14c10,9,17,26,22,51l16,-53l101,-6z m-138,82c0,-23,-3,-40,-11,-50c-5,-7,-12,-11,-21,-11c-9,0,-18,4,-27,13c-20,18,-40,54,-63,108c-22,54,-33,101,-33,141c0,15,2,26,7,33c5,7,11,10,17,10c13,0,26,-7,39,-22c19,-22,36,-48,51,-78c27,-54,41,-102,41,-144z"/>
+						<path d="M3486,3220l-77,260c22,-25,40,-41,54,-49c15,-8,31,-12,48,-12c33,0,57,12,74,37c16,25,24,54,24,86c0,78,-28,147,-83,208c-48,53,-104,80,-166,80c-47,0,-96,-14,-147,-42l133,-453c6,-22,10,-37,10,-46c0,-8,-3,-14,-9,-18c-9,-6,-22,-9,-40,-8l4,-17l148,-26l27,0z m-169,572c13,9,24,13,35,13c14,0,27,-3,36,-9c16,-10,32,-27,50,-53c17,-26,31,-56,43,-93c11,-36,17,-72,17,-108c0,-20,-4,-35,-13,-46c-8,-11,-18,-16,-30,-16c-18,0,-35,10,-49,30c-9,13,-19,41,-30,83l-59,199z"/>
+						<path d="M11872,3454l13,12c-28,33,-55,57,-82,72c-36,21,-73,31,-112,31c-26,0,-49,-6,-69,-17c-20,-11,-34,-26,-44,-46c-9,-20,-14,-40,-14,-61c0,-47,13,-94,38,-139c26,-46,60,-82,102,-108c42,-27,83,-40,123,-40c33,0,57,7,73,21c17,15,25,33,25,54c0,19,-6,35,-19,49c-12,13,-26,20,-41,20c-13,0,-24,-4,-33,-13c-9,-8,-13,-19,-13,-30c0,-16,8,-29,23,-41c11,-8,16,-15,16,-21c0,-5,-2,-9,-6,-12c-6,-5,-13,-7,-23,-7c-24,0,-47,10,-68,29c-28,26,-50,59,-65,98c-15,40,-22,77,-22,113c0,28,8,50,23,67c15,17,33,25,54,25c19,0,39,-5,60,-14c21,-9,42,-23,61,-42z"/>
+						<path d="M6693,2146l-181,0l-36,45l-42,49c-8,11,-14,21,-18,29c-3,7,-4,14,-4,20c0,7,4,14,11,20c7,6,19,9,36,10l0,15l-174,0l4,-15c16,-3,30,-8,42,-17c16,-11,39,-35,69,-71l415,-495l19,0l-20,479c-1,25,-1,40,-1,45c0,20,4,34,12,43c8,9,21,15,39,16l-4,15l-253,0l5,-15c25,-2,39,-4,43,-6c8,-4,15,-13,22,-26c7,-13,11,-35,12,-67l4,-74z m0,-37l11,-189l-161,189l150,0z"/>
+						<path d="M14204,6356l232,0c51,0,88,3,110,8c29,7,52,21,68,41c16,20,24,42,24,68c0,20,-6,42,-19,63c-13,22,-32,40,-57,54c-26,14,-65,26,-117,38c54,15,93,35,114,59c21,24,32,51,32,83c0,30,-10,59,-31,88c-21,29,-48,50,-83,63c-34,13,-97,20,-188,20l-243,0l5,-15c24,0,41,-2,51,-6c10,-5,18,-11,24,-21c7,-9,14,-28,22,-56l104,-360c10,-38,16,-62,16,-75c0,-10,-5,-18,-13,-25c-9,-7,-27,-11,-55,-12l4,-15z m132,259c39,-1,69,-7,91,-19c23,-11,40,-31,54,-58c13,-27,20,-52,20,-76c0,-22,-7,-41,-21,-55c-14,-14,-32,-21,-55,-20l-24,1l-65,227z m-9,32l-75,261c14,1,25,1,32,1c64,0,108,-18,133,-54c25,-36,37,-74,37,-115c0,-20,-5,-37,-14,-53c-10,-15,-22,-25,-37,-31c-15,-6,-41,-9,-76,-9z"/>
+						<path d="M3086,6308l-43,186l-15,0c-2,-51,-15,-89,-38,-114c-23,-25,-53,-38,-90,-38c-40,0,-80,17,-120,51c-40,34,-74,86,-101,156c-23,56,-34,112,-34,168c0,49,12,87,37,113c24,26,58,39,100,39c34,0,66,-7,94,-22c28,-15,57,-39,86,-73l21,0c-36,54,-71,91,-108,113c-36,21,-80,32,-133,32c-70,0,-127,-21,-170,-64c-43,-43,-64,-98,-64,-167c0,-64,17,-126,51,-184c35,-59,84,-106,148,-142c64,-36,128,-54,192,-54c24,0,54,5,90,15c18,5,31,7,38,7c15,0,29,-7,44,-22l15,0z"/>
+					</g>
+				</svg>
+				<div id="hoveroutput" style="display:none; position:absolute; padding:0.5em; background-color:#FFFFFF; border:0.06em solid #A0A0A0; border-radius:0.2em; white-space:pre"></div>
+			</div>
+		</div>
+<%=content_for :js do %>
+<script>
+$("a").click(function() {
+  $(this).toggleClass("active");
+});
+
+$(".master-btn").click(function() {
+  $('.volume').toggleClass("dim");
+});
+
+$('.master').change(function () {                 
+  var Width = $(this).val();
+  $('.volume').val(Width);
+}); 
+</script>
+<script>
+			"use strict";
+			
+			
+			// The main function, which handles the HTML input/output for solving a triangle.
+			function doSolve() {
+				let twosoln = false;  // Is set to true by doOutput() if any answer item is a length-2 array
+				
+				function doOutput(nodeId, val, suffix) {
+					if (and(typeof val == "object", val.length == 2)) {  // Array
+						setElementText(nodeId, formatNumber(val[0]) + suffix);
+						setElementText(nodeId + "2", formatNumber(val[1]) + suffix);
+						twosoln = true;
+					} else if (typeof val == "number") {
+						setElementText(nodeId, formatNumber(val) + suffix);
+						setElementText(nodeId + "2", formatNumber(val) + suffix);
+					} else
+						throw new Error("Assertion error");
+				}
+				
+				try {
+					// Get input and solve
+					const a = getInputNumber("sideAin");
+					const b = getInputNumber("sideBin");
+					const c = getInputNumber("sideCin");
+					const A = getInputNumber("angleAin");
+					const B = getInputNumber("angleBin");
+					const C = getInputNumber("angleCin");
+					const answer = solveTriangle(a, b, c, A, B, C);
+					solution = answer.slice(0, 6);  // Global variable for mouse hover
+					
+					// Set outputs
+					setElementText("status", answer[7]);
+					doOutput("sideAout" , answer[0], "");
+					doOutput("sideBout" , answer[1], "");
+					doOutput("sideCout" , answer[2], "");
+					doOutput("angleAout", answer[3], DEGREE);
+					doOutput("angleBout", answer[4], DEGREE);
+					doOutput("angleCout", answer[5], DEGREE);
+					doOutput("areaout"  , answer[6], "");
+					if (twosoln)
+						document.getElementById("formtable").classList.remove("onesoln");
+					else
+						document.getElementById("formtable").classList.add("onesoln");
+					
+				} catch (e) {
+					doClearOutputs();
+					setElementText("status", e.message);
+				}
+			}
+			
+			
+			/*---- Solver functions ----*/
+			
+			// Given some sides and angles, this returns a tuple of 8 number/string values.
+			function solveTriangle(a, b, c, A, B, C) {
+				const sides  = (a !== null) + (b !== null) + (c !== null);  // Boolean to integer conversion
+				const angles = (A !== null) + (B !== null) + (C !== null);  // Boolean to integer conversion
+				let area, status;
+				
+				if (sides + angles != 3)
+					throw new RangeError("Give exactly 3 pieces of information");
+				else if (sides == 0)
+					throw new RangeError("Give at least one side length");
+				
+				else if (sides == 3) {
+					status = "Side side side (SSS) case";
+					if (c >= a + b || a >= b + c || b >= c + a)
+						throw new RangeError(status + " - No solution");
+					A = solveAngle(b, c, a);
+					B = solveAngle(c, a, b);
+					C = solveAngle(a, b, c);
+					// Heron's formula
+					const s = (a + b + c) / 2;
+					area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+					
+				} else if (angles == 2) {
+					if (and(A === null, a !== null) || and(B === null, b !== null) || and(C === null,  c !== null))
+						status = "Angle side angle (ASA) case";
+					else
+						status = "Angle angle side (AAS) case";
+					// Find missing angle
+					if (A === null) A = 180 - B - C;
+					if (B === null) B = 180 - C - A;
+					if (C === null) C = 180 - A - B;
+					if (0 >= A || 0 >= B || 0 >= C)
+						throw new RangeError(status + " - No solution");
+					const sinA = Math.sin(degToRad(A));
+					const sinB = Math.sin(degToRad(B));
+					const sinC = Math.sin(degToRad(C));
+					// Use law of sines to find sides
+					let ratio;  // side / sin(angle)
+					if (a !== null) { ratio = a / sinA; area = a * ratio * sinB * sinC / 2; }
+					if (b !== null) { ratio = b / sinB; area = b * ratio * sinC * sinA / 2; }
+					if (c !== null) { ratio = c / sinC; area = c * ratio * sinA * sinB / 2; }
+					if (a === null) a = ratio * sinA;
+					if (b === null) b = ratio * sinB;
+					if (c === null) c = ratio * sinC;
+					
+				} else if (and(A !== null, a === null) || and(B !== null, b === null) || and(C !== null, c === null)) {
+					status = "Side angle side (SAS) case";
+					if (and(A !== null, A >= 180) || and(B !== null, B >= 180) || and(C !== null, C >= 180))
+						throw new RangeError(status + " - No solution");
+					if (a === null) a = solveSide(b, c, A);
+					if (b === null) b = solveSide(c, a, B);
+					if (c === null) c = solveSide(a, b, C);
+					if (A === null) A = solveAngle(b, c, a);
+					if (B === null) B = solveAngle(c, a, b);
+					if (C === null) C = solveAngle(a, b, c);
+					if (A !== null) area = b * c * Math.sin(degToRad(A)) / 2;
+					if (B !== null) area = c * a * Math.sin(degToRad(B)) / 2;
+					if (C !== null) area = a * b * Math.sin(degToRad(C)) / 2;
+					
+				} else {
+					status = "Side side angle (SSA) case - ";
+					let knownSide, knownAngle, partialSide;
+					if (and(a !== null, A !== null)) { knownSide = a; knownAngle = A; }
+					if (and(b !== null, B !== null)) { knownSide = b; knownAngle = B; }
+					if (and(c !== null, C !== null)) { knownSide = c; knownAngle = C; }
+					if (and(a !== null, A === null)) partialSide = a;
+					if (and(b !== null, B === null)) partialSide = b;
+					if (and(c !== null, C === null)) partialSide = c;
+					if (knownAngle >= 180)
+						throw new RangeError(status + "No solution");
+					const ratio = knownSide / Math.sin(degToRad(knownAngle));
+					const temp = partialSide / ratio;  // sin(partialAngle)
+					let partialAngle, unknownSide, unknownAngle;
+					if (temp > 1 || and(knownAngle >= 90, partialSide >= knownSide))
+						throw new RangeError(status + "No solution");
+					else if (temp == 1 || knownSide >= partialSide) {
+						status += "Unique solution";
+						partialAngle = radToDeg(Math.asin(temp));
+						unknownAngle = 180 - knownAngle - partialAngle;
+						unknownSide = ratio * Math.sin(degToRad(unknownAngle));  // Law of sines
+						area = knownSide * partialSide * Math.sin(degToRad(unknownAngle)) / 2;
+					} else {
+						status += "Two solutions";
+						const partialAngle0 = radToDeg(Math.asin(temp));
+						const partialAngle1 = 180 - partialAngle0;
+						const unknownAngle0 = 180 - knownAngle - partialAngle0;
+						const unknownAngle1 = 180 - knownAngle - partialAngle1;
+						const unknownSide0 = ratio * Math.sin(degToRad(unknownAngle0));  // Law of sines
+						const unknownSide1 = ratio * Math.sin(degToRad(unknownAngle1));  // Law of sines
+						partialAngle = [partialAngle0, partialAngle1];
+						unknownAngle = [unknownAngle0, unknownAngle1];
+						unknownSide = [unknownSide0, unknownSide1];
+						area = [knownSide * partialSide * Math.sin(degToRad(unknownAngle0)) / 2,
+						        knownSide * partialSide * Math.sin(degToRad(unknownAngle1)) / 2];
+					}
+					if (and(a !== null, A === null)) A = partialAngle;
+					if (and(b !== null, B === null)) B = partialAngle;
+					if (and(c !== null, C === null)) C = partialAngle;
+					if (and(a === null, A === null)) { a = unknownSide; A = unknownAngle; }
+					if (and(b === null, B === null)) { b = unknownSide; B = unknownAngle; }
+					if (and(c === null, C === null)) { c = unknownSide; C = unknownAngle; }
+				}
+				
+				return [a, b, c, A, B, C, area, status];
+			}
+			
+			
+			// Returns side c using law of cosines.
+			function solveSide(a, b, C) {
+				C = degToRad(C);
+				if (C > 0.001)
+					return Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(C));
+				else  // Explained in https://www.nayuki.io/page/numerically-stable-law-of-cosines
+					return Math.sqrt((a - b) * (a - b) + a * b * C * C * (1 - C * C / 12));
+			}
+			
+			
+			// Returns angle C using law of cosines.
+			function solveAngle(a, b, c) {
+				const temp = (a * a + b * b - c * c) / (2 * a * b);
+				if (and(temp >= -1, 0.9999999 >= temp))
+					return radToDeg(Math.acos(temp));
+				else if (1 >= temp)  // Explained in https://www.nayuki.io/page/numerically-stable-law-of-cosines
+					return radToDeg(Math.sqrt((c * c - (a - b) * (a - b)) / (a * b)));
+				else
+					throw new RangeError("No solution");
+			}
+			
+			
+			/*---- Input/output/GUI handling ----*/
+			
+			// e.g. sideA is associated with sideAin, sideAout, and sideAout2. But area does not have an input.
+			const ioNames = ["sideA", "sideB", "sideC", "angleA", "angleB", "angleC", "area"];
+			
+			// Either null, or an array of 6 items: [sideA, sideB, sideC, angleA, angleB, angleC].
+			// Each item is either a number or an array of 2 numbers.
+			let solution = null;
+			
+			
+			// Parses the number from the HTML form field with the given ID.
+			// Returns the number if it's positive and finite. Throws an exception if it's zero, negative, infinite, or NaN.
+			// Returns null if the field is blank.
+			function getInputNumber(elemId) {
+				const str = document.getElementById(elemId).value;
+				if (str == "")
+					return null;
+				const result = parseFloat(str);
+				if (!isFinite(result))
+					throw new Error("Invalid number");
+				if (0 >= result)
+					throw new Error("All inputs must be positive");
+				return result;
+			}
+			
+			
+			function doClearOutputs() {
+				solution = null;
+				document.getElementById("formtable").classList.add("onesoln");
+				for (const name of ioNames) {
+					setElementText(name + "out" , "");
+					setElementText(name + "out2", "");
+				}
+				setElementText("status", "");
+			}
+			
+			
+			const RECT_PADDED_SIZE = 0.0720;
+			
+			// List of tuples (left, top, width, height). Values will be modified by initImageMap() to include padding.
+			const rectangles = [
+				[0.4922, 0.4419, 0.0227, 0.0229],
+				[0.1784, 0.1789, 0.0221, 0.0339],
+				[0.6424, 0.1754, 0.0201, 0.0229],
+				[0.3492, 0.0964, 0.0322, 0.0333],
+				[0.7803, 0.3531, 0.0330, 0.0326],
+				[0.1393, 0.3504, 0.0322, 0.0340],
+			];
+			
+			function initImageMap() {
+				let container = document.getElementById("diagramcontainer");
+				const containerWidth = parseEm(container.style.width);
+				rectangles.forEach((rect, i) => {
+					let elem = document.createElement("a");
+					container.insertBefore(elem, container.querySelector("#hoveroutput"));
+					elem.href = "#";
+					elem.classList.add("letterhover");
+					rect[0] -= (RECT_PADDED_SIZE - rect[2]) / 2;
+					rect[1] -= (RECT_PADDED_SIZE - rect[3]) / 2;
+					elem.style.left = rect[0] * containerWidth + "em";
+					elem.style.top  = rect[1] * containerWidth + "em";
+					elem.style.width = elem.style.height = RECT_PADDED_SIZE * containerWidth + "em";
+					
+					elem.onmouseover = () => {
+						if (solution === null)
+							return;
+						
+						const suffix = and(i >= 3, 6 > i) ? DEGREE : "";
+						let text;
+						if (typeof solution[i] == "object")
+							text = formatNumber(solution[i][0]) + suffix + " or\n" + formatNumber(solution[i][1]) + suffix;
+						else
+							text = formatNumber(solution[i]) + suffix;
+						setElementText("hoveroutput", text);
+						
+						// Set hover element style
+						let hovelem = document.getElementById("hoveroutput");
+						hovelem.style.display = "block";
+						hovelem.style.left = rect[0] * containerWidth + "em";
+						hovelem.style.bottom = ((0.5 - rect[1]) * containerWidth + 0.5) + "em";
+					};
+					
+					elem.onmouseout = () => {
+						setElementText("hoveroutput", "");
+						document.getElementById("hoveroutput").style.display = "none";
+					};
+					elem.onclick = ev => {
+						ev.preventDefault();
+						document.getElementById(ioNames[i] + "in").select();
+					};
+				});
+			}
+			
+			setTimeout(initImageMap);
+			
+			
+			/*---- Simple functions ----*/
+			
+			function setElementText(nodeId, str) {
+				document.getElementById(nodeId).textContent = str;
+			}
+			
+			function parseEm(str) {
+				const match = /^(\d+(?:\.\d*)?)em$/.exec(str);
+				if (match !== null)
+					return parseFloat(match[1]);
+				else
+					throw new RangeError("Invalid unit");
+			}
+			
+			function formatNumber(x) {
+				return x.toPrecision(9);
+			}
+			
+			function degToRad(x) {
+				return x / 180 * Math.PI;
+			}
+			
+			function radToDeg(x) {
+				return x / Math.PI * 180;
+			}
+			
+			// Workaround to avoid HTML parsing issues
+			function and(x, y) {
+				return x ? y : false;
+			}
+			
+			const DEGREE = "\u00B0";
+		</script>
+<script>
+// program to generate random strings
+
+// declare all characters
+const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function generateString(length) {
+    let result = ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+// Helper function to get an element's exact position
+function getPosition(el) {
+  var xPos = 0;
+  var yPos = 0;
+ 
+  while (el) {
+    if (el.tagName == "BODY") {
+      // deal with browser quirks with body/window/document and page scroll
+      var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+      var yScroll = el.scrollTop || document.documentElement.scrollTop;
+ 
+      xPos += (el.offsetLeft - xScroll + el.clientLeft);
+      yPos += (el.offsetTop - yScroll + el.clientTop);
+    } else {
+      // for all other non-BODY elements
+      xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+      yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+    }
+ 
+    el = el.offsetParent;
+  }
+  return {
+    x: xPos,
+    y: yPos
+  };
+}
+
+console.log(generateString(5));
+$(function(){
+
+$("div").click(function(e){
+    //var posX = $(this).offset().left, posY = $(this).offset().top;
+    //var posX = e.clientX, posY = e.clientY;
+    var parentPosition = getPosition(e.currentTarget);
+    var posX = e.clientX ;
+    var posY = e.clientY ;
+let rect = e.target.getBoundingClientRect();
+    var width = e.target.clientWidth, height = e.target.clientHeight;
+    console.log("height: "+ height +" width: "+ width);
+console.log("top"+rect.top+", left: "+rect.left)
+    var coorx=(posX) - (width/2) - rect.left;
+    var coory=(posY) - (height/2) - rect.top;
+var res;
+    console.log("coorx: "+ coorx +"coory: "+ coory +"// e.pageX: " + e.pageX + " posX:" + posX + " e.pageY:" + e.pageY + " posY:" + posY);
+    if (coorx > 0 && coory < 0){
+    document.getElementById("sideBin").value=Math.abs(coory);
+    document.getElementById("sideCin").value=Math.abs(coorx);
+    document.getElementById("angleAin").value="90";
+    doSolve();
+    res=parseFloat(document.getElementById("angleCout").innerHTML.replace("°",""));
+    document.getElementById("triangleform").reset();
+    } else if (coorx > 0 && coory > 0){
+    document.getElementById("sideBin").value=Math.abs(coorx);
+    document.getElementById("sideCin").value=Math.abs(coory);
+    document.getElementById("angleAin").value="90";
+    doSolve();
+    res=parseFloat(document.getElementById("angleCout").innerHTML.replace("°",""))+90.0;
+    document.getElementById("triangleform").reset();
+    } else if (coorx < 0 && coory > 0){
+    document.getElementById("sideCin").value=Math.abs(coory);
+    document.getElementById("sideAin").value=Math.abs(coorx);
+    document.getElementById("angleBin").value="90";
+    doSolve();
+    res=parseFloat(document.getElementById("angleAout").innerHTML.replace("°",""))+180.0;
+    document.getElementById("triangleform").reset();
+    } else if (coorx < 0 && coory < 0){
+    document.getElementById("sideBin").value=Math.abs(coory);
+    document.getElementById("sideAin").value=Math.abs(coorx);
+    document.getElementById("angleCin").value="90";
+    doSolve();
+    res=parseFloat(document.getElementById("angleBout").innerHTML.replace("°",""))+270.0;
+    document.getElementById("triangleform").reset();
+    }
+
+    console.log("res "+res+" e.pageX: " + e.pageX + " posX:" + posX + " e.pageY:" + e.pageY + " posY:" + posY);
+    if (!e.target.id){
+     e.target.id=String(generateString(7)).replace(' ','');
+    }
+
+$('.mycss'+String(e.target.id).replace(' ','')).remove();
+$('head').append('<style rel="stylesheet" class="mycss'+String(e.target.id).replace(' ','')+'">#'+String(e.target.id).replace(' ','')+'::after{transform:rotate('+String(res)+'deg);}</style>');
+
+});
+});
+</script>
+<%end%>

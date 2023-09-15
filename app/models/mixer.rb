@@ -1,0 +1,2 @@
+class Mixer < ApplicationRecord
+end

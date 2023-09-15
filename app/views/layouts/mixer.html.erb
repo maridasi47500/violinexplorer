@@ -6,6 +6,8 @@
     <%= csp_meta_tag %>
 <link rel="stylesheet" href="/assets/<%=params[:controller]%>.css"/>
 <link rel="stylesheet" href="/assets/<%=params[:controller]%>_<%=params[:action]%>.css"/>
+<%= stylesheet_link_tag "mixers", :media => "all" %>
+
 
   </head>
 
@@ -15,7 +17,6 @@
     <a href="/">bienvenue</a>
 <%=link_to "pieces",pieces_path%>
 <%=link_to "playlists",playlists_path%>
-<%=link_to "mixers",mixers_path%>
 
 </nav>
     <%= yield %>
