@@ -1,0 +1,77 @@
+<%= form_with(model: mic, local: true) do |form| %>
+  <% if mic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mic.errors.count, "error") %> prohibited this mic from being saved:</h2>
+
+      <ul>
+        <% mic.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :mic %>
+    <%= form.check_box :mic %>
+  </div>
+
+  <div class="field">
+    <%= form.label :line_in %>
+    <%= form.check_box :line_in %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gain %>
+    <%= form.text_field :gain %>
+  </div>
+
+  <div class="field">
+    <%= form.label :eq_high %>
+    <%= form.text_field :eq_high %>
+  </div>
+
+  <div class="field">
+    <%= form.label :eq_mid %>
+    <%= form.text_field :eq_mid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :eq_low %>
+    <%= form.text_field :eq_low %>
+  </div>
+
+  <div class="field">
+    <%= form.label :low_cut %>
+    <%= form.check_box :low_cut %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fx %>
+    <%= form.text_field :fx %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ban %>
+    <%= form.text_field :ban %>
+  </div>
+
+  <div class="field">
+    <%= form.label :level %>
+    <%= form.text_field :level %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mixer_id %>
+    <%= form.number_field :mixer_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_field :type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

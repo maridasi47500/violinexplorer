@@ -1,0 +1,2 @@
+class Ytlink < ApplicationRecord
+end

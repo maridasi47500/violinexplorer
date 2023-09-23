@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mic:</strong>
+  <%= @mic.mic %>
+</p>
+
+<p>
+  <strong>Line in:</strong>
+  <%= @mic.line_in %>
+</p>
+
+<p>
+  <strong>Gain:</strong>
+  <%= @mic.gain %>
+</p>
+
+<p>
+  <strong>Eq high:</strong>
+  <%= @mic.eq_high %>
+</p>
+
+<p>
+  <strong>Eq mid:</strong>
+  <%= @mic.eq_mid %>
+</p>
+
+<p>
+  <strong>Eq low:</strong>
+  <%= @mic.eq_low %>
+</p>
+
+<p>
+  <strong>Low cut:</strong>
+  <%= @mic.low_cut %>
+</p>
+
+<p>
+  <strong>Fx:</strong>
+  <%= @mic.fx %>
+</p>
+
+<p>
+  <strong>Ban:</strong>
+  <%= @mic.ban %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @mic.level %>
+</p>
+
+<p>
+  <strong>Mixer:</strong>
+  <%= @mic.mixer_id %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @mic.type %>
+</p>
+
+<%= link_to 'Edit', edit_mic_path(@mic) %> |
+<%= link_to 'Back', mics_path %>

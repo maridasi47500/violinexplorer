@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mixers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ctrf room out l</th>
+      <th>Ctrl room out r</th>
+      <th>2tr out r</th>
+      <th>2tr out l</th>
+      <th>2tr in r</th>
+      <th>2tr in l</th>
+      <th>Main out l</th>
+      <th>Main out r</th>
+      <th>Phones</th>
+      <th>Fx send</th>
+      <th>Phantom</th>
+      <th>Fx send value</th>
+      <th>2tr to ctrl room</th>
+      <th>2tr to mix</th>
+      <th>Fx to ctrl room</th>
+      <th>Phones value</th>
+      <th>Main mix value</th>
+      <th>Song</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mixers.each do |mixer| %>
+      <tr>
+        <td><%= mixer.ctrf_room_out_l %></td>
+        <td><%= mixer.ctrl_room_out_r %></td>
+        <td><%= mixer._2tr_out_r %></td>
+        <td><%= mixer._2tr_out_l %></td>
+        <td><%= mixer._2tr_in_r %></td>
+        <td><%= mixer._2tr_in_l %></td>
+        <td><%= mixer.main_out_l %></td>
+        <td><%= mixer.main_out_r %></td>
+        <td><%= mixer.phones %></td>
+        <td><%= mixer.fx_send %></td>
+        <td><%= mixer.phantom %></td>
+        <td><%= mixer.fx_send_value %></td>
+        <td><%= mixer._2tr_to_ctrl_room %></td>
+        <td><%= mixer._2tr_to_mix %></td>
+        <td><%= mixer.fx_to_ctrl_room %></td>
+        <td><%= mixer.phones_value %></td>
+        <td><%= mixer.main_mix_value %></td>
+        <td><%= mixer.song_id %></td>
+        <td><%= link_to 'Show', mixer %></td>
+        <td><%= link_to 'Edit', edit_mixer_path(mixer) %></td>
+        <td><%= link_to 'Destroy', mixer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mixer', new_mixer_path %>

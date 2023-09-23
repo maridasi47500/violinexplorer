@@ -20,6 +20,13 @@
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
+  <%=form.fields_for :ytlinks do |f|%>
+  <div class="field">
+    <%= f.label :link %>
+    https://www.youtube.com/watch?v=
+    <%= f.text_field :link %>
+  </div>
+  <%end%>
 
   <div class="actions">
     <%= form.submit %>

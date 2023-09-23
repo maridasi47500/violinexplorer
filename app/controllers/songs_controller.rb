@@ -1,6 +1,8 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: %i[ show edit update destroy myurl recordings vids]
-
+  before_action :set_song, only: %i[ show edit update destroy myurl recordings vids addytlink]
+  def addytlink
+    @song.ytlinks.new
+  end
   def myurl
     @k=1
     while Dir.glob("#{Rails.root.to_s}/public/uploads/**#{@song.myfilename}recording**").any?{|y|y.include?(@song.myfilename+"recording"+@k.to_s)} do
@@ -22,6 +24,7 @@ class SongsController < ApplicationController
 
   # GET /songs/1 or /songs/1.json
   def show
+    @comment=Comment.new(song_id:@song.id)
     @mymessages=Mymessage.all
     if params[:my_devices] && params[:my_devices].length > 0
       session["my_devices"]||=[]
@@ -93,6 +96,6 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      params.require(:song).permit(:artist, :title,:myfile,:myfile2,:myfile3)
+      params.require(:song).permit(:artist, :title,:myfile,:myfile2,:myfile3,:ytlinks_attributes=>{})
     end
 end

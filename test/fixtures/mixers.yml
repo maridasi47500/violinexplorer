@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ctrf_room_out_l: false
+  ctrl_room_out_r: false
+  2tr_out_r: false
+  2tr_out_l: false
+  2tr_in_r: false
+  2tr_in_l: false
+  main_out_l: false
+  main_out_r: false
+  phones: false
+  fx_send: false
+  phantom: false
+  fx_send_value: 1.5
+  2tr_to_ctrl_room: false
+  2tr_to_mix: false
+  fx_to_ctrl_room: false
+  phones_value: 1.5
+  main_mix_value: 1.5
+  song_id: false
+
+two:
+  ctrf_room_out_l: false
+  ctrl_room_out_r: false
+  2tr_out_r: false
+  2tr_out_l: false
+  2tr_in_r: false
+  2tr_in_l: false
+  main_out_l: false
+  main_out_r: false
+  phones: false
+  fx_send: false
+  phantom: false
+  fx_send_value: 1.5
+  2tr_to_ctrl_room: false
+  2tr_to_mix: false
+  fx_to_ctrl_room: false
+  phones_value: 1.5
+  main_mix_value: 1.5
+  song_id: false

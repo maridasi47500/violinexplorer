@@ -1,0 +1,2 @@
+module YtlinksHelper
+end

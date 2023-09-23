@@ -1,0 +1,2 @@
+class Linein < Mic
+end

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :mics
+  resources :mixers
+  resources :comments
+  resources :ytlinks
   resources :mymessages
   resources :votes
   post 'video/save/:id', to: 'video#save'
@@ -11,6 +15,7 @@ Rails.application.routes.draw do
   resources :songs do
     member do
       get "recordings"
+      get "addytlink"
       get "vids"
     end
   end

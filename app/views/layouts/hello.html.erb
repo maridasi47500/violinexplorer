@@ -4,7 +4,7 @@
     <title><%=yield :title%> <%=(yield :title).length > 0 ? " - " : "" %>The Violin explorer</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-     <%= stylesheet_link_tag "application", :media => "all" %>
+     <%= stylesheet_link_tag "mixers", :media => "all" %>
 <link rel="stylesheet" href="/assets/<%=params[:controller]%>.css"/>
 <link rel="stylesheet" href="/assets/<%=params[:controller]%>_<%=params[:action]%>.css"/>
 

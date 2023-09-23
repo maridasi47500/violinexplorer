@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mic: false
+  line_in: false
+  gain: 1.5
+  eq_high: 1.5
+  eq_mid: 1.5
+  eq_low: 1.5
+  low_cut: false
+  fx: 1.5
+  ban: 1.5
+  level: 1.5
+  mixer_id: 1
+  type: 
+
+two:
+  mic: false
+  line_in: false
+  gain: 1.5
+  eq_high: 1.5
+  eq_mid: 1.5
+  eq_low: 1.5
+  low_cut: false
+  fx: 1.5
+  ban: 1.5
+  level: 1.5
+  mixer_id: 1
+  type: 

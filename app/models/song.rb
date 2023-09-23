@@ -2,6 +2,9 @@ class Song < ApplicationRecord
 has_many :recordings
 has_many :accompaniments
 has_many :videos
+has_many :ytlinks
+has_many :comments
+accepts_nested_attributes_for :ytlinks, allow_destroy: true
 def self.numberrecordings
 select("*").select("songs.*, (select count(myfiles.id) from myfiles where songs.id = myfiles.song_id) as nbrec").group("songs.id").order("nbrec desc")
 end
