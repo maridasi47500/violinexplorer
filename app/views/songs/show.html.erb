@@ -13,6 +13,12 @@
 <p>
   <%= @song.artist %>
 </p>
+<div id="toselect" hidden><%=params[:my_devices]%></div>
+<div id="toselectoutput" hidden><%=params[:my_devices_output]%></div>
+<span>input</span> 
+<%=select_tag :my_devices,options_for_select(@my_devices), {include_blank:"",selected: params[:my_devices],onchange: "window.location='#{request.path}?my_devices='+String(this.value)+'&my_devices_output'+String(my_devices_output.value)"}%>
+<span>output</span>
+<%=select_tag :my_devices_output,options_for_select(@my_devices), {include_blank:"",selected: params[:my_devices_output],onchange: "window.location='#{request.path}?my_devices_output='+String(this.value)+'&my_devices='+String(my_devices.value)"}%>
       <header>
 
         <h1>
@@ -20,8 +26,11 @@
 	<div id="controls">
 		<img id="record" src="/img/mic128.png" onclick="toggleRecording(this);">
 <form id="myvideoform"> </form>
-<form id="myform"><textarea name="mycontent"></textarea> </form>
-		<a id="save" href="#"><img src="/img/save.svg"></a>
+<form id="myform"><div><!-- comment -->
+
+<%=label_tag :mycontent, "Texte de mon message"%>
+<%=select_tag :mycontent,  options_from_collection_for_select(@mymessages, "id", "content"), include_blank: "texte du message que j'ai enregistré"%> </form>
+</div><a id="save" href="#"><img src="/img/save.svg"></a>
 	</div>
 
 
@@ -63,12 +72,16 @@
     <%=form.file_field :myfile%>
     <%=form.submit "ajouter le morceau"%>
   <%end%>
+  <label for="recordpart"> enregistrer la partie seule (avec  l'accompagnement)
+      <input id="recordpart" type="checkbox" name="recordpart" value="1" /></label>
+
   <h4>accompagnement</h4>
-<%if Dir.glob(Rails.root.to_s+"/public/uploads/**accompaniment**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
+<%@song.accompaniments.each do |acc|%>
+  <label for="myaccomp<%=acc.id%>">enregistrer avec cet accompagnement de piano</label>
+  <input id="myaccomp<%=acc.id%>" type="radio" name="myaccomp" value="<%=acc.id%>" />
 
-
-   <audio  preload="none" id="mysong" controls>
-  <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
+   <audio  preload="none" id="mysong<%=acc.id%>" controls>
+  <source  src="/uploads/<%=acc.filename%>" id="myaccompaniment<%=acc.id%>" type="audio/mp3">
   Your browser does not support the audio tag.
 </audio>
 <%end%>
@@ -92,6 +105,9 @@
 
 </div>
 
+<div id="overlay">
+  <div id="text">Overlay Text</div>
+</div>
 
 
 <%= link_to 'Filmer', vids_song_path(@song) %> |

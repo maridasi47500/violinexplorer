@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_29_235801) do
+ActiveRecord::Schema.define(version: 2023_08_15_164526) do
+
+  create_table "accompaniments", force: :cascade do |t|
+    t.integer "song_id"
+    t.string "filename"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "myfiles", force: :cascade do |t|
     t.string "filename"
@@ -19,6 +26,11 @@ ActiveRecord::Schema.define(version: 2023_05_29_235801) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "type"
     t.text "mycontent"
+<<<<<<< HEAD
+=======
+    t.integer "accompaniment_id"
+    t.boolean "partonly"
+>>>>>>> origin/myaccompaniment
   end
 
   create_table "pieces", force: :cascade do |t|
