@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_29_221434) do
+ActiveRecord::Schema.define(version: 2023_05_29_235801) do
 
   create_table "myfiles", force: :cascade do |t|
     t.string "filename"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2023_05_29_221434) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "type"
+    t.text "mycontent"
   end
 
   create_table "pieces", force: :cascade do |t|
