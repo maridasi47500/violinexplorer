@@ -239,6 +239,33 @@ function initAudio() {
         if (!navigator.mediaDevices?.enumerateDevices) {
   console.log("enumerateDevices() not supported.");
 } else {
+  // List cameras and microphones.
+		 navigator.mediaDevices
+    .enumerateDevices()
+    .then((devices) => {
+	    function adddevice(device){
+        console.log(`${device.kind}: ${device.label} id = ${device.deviceId}`);
+        if (device.kind === 'audiooutput'){
+                              $("#my_devices_output").prepend("<option value=\""+String(device.deviceId)+"\">"+String(device.kind)+" "+String(device.label)+"</option>")
+                              } else if(device.kind === 'audioinput') {
+                  $("#my_devices").prepend("<option value=\""+String(device.deviceId)+"\">"+String(device.kind)+" "+String(device.label)+"</option>")
+                              }
+	    }
+	    const orderPromisses = devices.map(device => adddevice(device));
+         Promise.all(orderPromisses).then(arrayOfResponses => {
+             // do your stuff
+             $("#my_devices").val($("#toselect").html());
+             $("#my_devices_output").val($("#toselectoutput").html());
+   
+         })
+
+
+
+
+    })
+    .catch((err) => {
+      console.error(`${err.name}: ${err.message}`);
+    });
      navigator.getUserMedia(
         {
             "audio": {
@@ -259,38 +286,7 @@ function initAudio() {
             alert('Error getting audio');
             console.log(e);
         });
-  // List cameras and microphones.
-		 navigator.mediaDevices
-    .enumerateDevices()
-    .then((devices) => {
-	    function adddevice(device){
-        console.log(`${device.kind}: ${device.label} id = ${device.deviceId}`);
-        if (device.kind === 'audiooutput'){
-                              $("#my_devices_output").prepend("<option value=\""+String(device.deviceId)+"\">"+String(device.kind)+" "+String(device.label)+"</option>")
-                              } else if(device.kind === 'audioinput') {
-                  $("#my_devices").prepend("<option value=\""+String(device.deviceId)+"\">"+String(device.kind)+" "+String(device.label)+"</option>")
-                                  
-                              }
-                              
-        
-	    }
 
-
-	    const orderPromisses = devices.map(device => adddevice(device));
-         Promise.all(orderPromisses).then(arrayOfResponses => {
-             // do your stuff
-             $("#my_devices").val($("#toselect").html());
-             $("#my_devices_output").val($("#toselectoutput").html());
-   
-         })
-
-
-
-
-    })
-    .catch((err) => {
-      console.error(`${err.name}: ${err.message}`);
-    });
 
 }
         
