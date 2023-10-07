@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_29_221434) do
+ActiveRecord::Schema.define(version: 2023_09_10_222657) do
+
+  create_table "mixers", force: :cascade do |t|
+    t.boolean "ctrf_room_out_l"
+    t.boolean "ctrl_room_out_r"
+    t.boolean "_2tr_out_r"
+    t.boolean "_2tr_out_l"
+    t.boolean "_2tr_in_r"
+    t.boolean "_2tr_in_l"
+    t.boolean "main_out_l"
+    t.boolean "main_out_r"
+    t.boolean "phones"
+    t.boolean "fx_send"
+    t.boolean "phantom"
+    t.float "fx_send_value"
+    t.boolean "_2tr_to_ctrl_room"
+    t.boolean "_2tr_to_mix"
+    t.boolean "fx_to_ctrl_room"
+    t.float "phones_value"
+    t.float "main_mix_value"
+    t.integer "song_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "myfiles", force: :cascade do |t|
     t.string "filename"
@@ -18,6 +41,7 @@ ActiveRecord::Schema.define(version: 2023_05_29_221434) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "type"
+    t.text "mycontent"
   end
 
   create_table "pieces", force: :cascade do |t|

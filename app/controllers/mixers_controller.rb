@@ -66,6 +66,7 @@ class MixersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mixer_params
-      params.fetch(:mixer, {})
+            params.require(:mixer).permit(:ctrf_room_out_l, :ctrl_room_out_r, :_2tr_out_r, :_2tr_out_l, :_2tr_in_r, :_2tr_in_l, :main_out_l, :main_out_r, :phones, :fx_send, :phantom, :fx_send_value, :_2tr_to_ctrl_room, :_2tr_to_mix, :fx_to_ctrl_room, :phones_value, :main_mix_value, :song_id)
+
     end
 end

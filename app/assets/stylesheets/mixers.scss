@@ -525,3 +525,8 @@ input[type='range'].dim
 .channel1 {
 float:right;
 }
+table td, table tr {
+	min-width: 20px;
+	min-height: 20px;
+	border: 1px solid white;
+}
