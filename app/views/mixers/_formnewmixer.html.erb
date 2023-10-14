@@ -161,25 +161,24 @@ level
 <br>
 <table class="partiehautdemonmixer">
   <tr>
-    <td colspan="1" rowspan="2">mic 1</td>
-    <td colspan="1" rowspan="2">mic 2</td>
-    <td colspan="1" rowspan="2">mic 3</td>
-    <td colspan="1" rowspan="2">mic 4</td>
+    <%@mixers.each do |x|%>
+      <td colspan="1" rowspan="2">mic <%=x%></td>
+  <%end%>
     <td colspan="4">XENYX</td>
     <td colspan="2" rowspan="4">
       <table>
-        <tr><td colspan="2"></td></tr>
+        <tr><td colspan="2">ctrl room out</td></tr>
   <tr>
-    <td></td>
-    <td></td>
+    <td>l</td>
+    <td>r</td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
+    <td>l</td>
+    <td>r out 2 track</td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
+    <td>l</td>
+    <td>r in</td>
   </tr>
       </table>
 
@@ -187,32 +186,28 @@ level
 
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>fx send</td>
+    <td>phones</td>
+    <td>main out l</td>
+    <td>r</td>
 
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <%@mixers.each do |x|%>
+      <td>line in <%=x%></td>
+  <%end%>
+    <%@othermixers.each do |x|%>
+      <td>l line in <%=x%></td>
+  <%end%>
 
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <%@mixers.each do |x|%>
+      <td>gain <%=x%></td>
+  <%end%>
+    <%@othermixers.each do |x|%>
+      <td>r line in <%=x%></td>
+  <%end%>
 
   </tr>
 
@@ -222,12 +217,12 @@ level
 <p>hello</p>
 <table class="basdemonmixer">
   <tr>
-    <td>eq high 1</td>
-    <td>eq high 2</td>
-    <td>eq high 3</td>
-    <td>eq high 4</td>
-    <td>fx 5/6</td>
-    <td>fx/ 9/10</td>
+    <%@mixers.each do |x|%>
+      <td>eq high <%=x%> - 12kHz</td>
+  <%end%>
+    <%@mixersA.each do |x|%>
+      <td>fx <%=x%></td>
+  <%end%>
     <td rowspan="6" colspan="2">
 <table>
   <tr>
@@ -258,44 +253,38 @@ level
     </td>
   </tr>
   <tr>
-    <td>mid high 1</td>
-    <td>mid high2</td>
-    <td>mid high 3</td>
-    <td>mid high 4</td>
-    <td>bal 5/6</td>
-    <td>bal 9/10</td>
+    <%@mixers.each do |x|%>
+      <td>mid  <%=x%> - 2.5kHz</td>
+  <%end%>
+    <%@mixersA.each do |x|%>
+      <td><%=x%> 5/6</td>
+  <%end%>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>last lind</td>
+    <%@mixers.each do |x|%>
+      <td>low <%=x%> - 80Hz</td>
+  <%end%>
+    <%@mixersA.each do |x|%>
+      <td>level <%=x%></td>
+  <%end%>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>last lind</td>
+    <%(@mixers+@mixersB).each do |x|%>
+      <td><%=x%> FX</td>
+  <%end%>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>last lind</td>
+    <%@mixers.each do |x|%>
+      <td><%=x%> pan</td>
+  <%end%>
+    <%@mixersB.each do |x|%>
+      <td><%=x%> bal</td>
+  <%end%>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>last lind</td>
+    <%(@mixers+@mixersB).each do |x|%>
+      <td><%=x%> level</td>
+  <%end%>
   </tr>
       </table>
 

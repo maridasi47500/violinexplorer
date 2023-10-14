@@ -14,6 +14,11 @@ class MixersController < ApplicationController
   # GET /mixers/new
   def new
     @mixer = Mixer.new
+    @mixersA=["5/6", "9/10"]
+    @mixersB=["7/8", "11/12"]
+    @mixers=1.upto(4).to_a
+    @othermixers=["5/6", "7/8", "9/10", "11/12"]
+
   end
 
   # GET /mixers/1/edit
