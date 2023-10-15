@@ -3,113 +3,88 @@
 <h1>Mixers</h1>
 
 <table class="mixer">
-      <tr>
-      <td>
-        <a class="mic"></a>
-mic
-      </td>
-    <td>
-fx send
-    <a class="linein fxsen"></a>
-    </td>
-    <td>
-phones
-    <a class="linein phones"></a>
-    </td>
-    <td>
-main out
-    <a class="linein main_out_l"></a>
-    </td>
-    <td>
-    <a class="linein main_out_r"></a>
-    </td>
-    <td>
-ctrl room
-    <a class="linein ctrl_out_l"></a>
-    <a class="linein ctrl_out_r"></a>
+
+
+
+
+
+
+</table>
+<br>
+<table class="partiehautdemonmixer">
+  <tr>
+    <%@mixers.each do |x|%>
+      <td colspan="1" rowspan="2"><a class="mic"></a>mic <%=x%></td>
+  <%end%>
+    <td colspan="4">XENYX</td>
+    <td colspan="2" rowspan="4">
+      <table>
+        <tr><td colspan="2">ctrl room out</td></tr>
+  <tr>
+    <td><a class="linein "></a>l</td>
+    <td><a class="linein "></a>r</td>
+  </tr>
+  <tr>
+    <td><a class="linein "></a>l</td>
+    <td><a class="linein "></a>r out 2 track</td>
+  </tr>
+  <tr>
+    <td><a class="linein "></a>l</td>
+    <td><a class="linein "></a>r in</td>
+  </tr>
+      </table>
+
     </td>
 
-        </tr>
-        <tr>
-      <td>
-        <a class="linein"></a><!--1,2,3,4,  5 , 11, 7, 9-->
-mic
-      </td>
-    <td>
-    <a class="linein 2tr_out_l"></a>
+  </tr>
+  <tr>
+    <td><a class="linein"></a>fx send</td>
+    <td><a class="linein "></a>phones</td>
+    <td><a class="linein"></a>main out l</td>
+    <td><a class="linein"></a>r</td>
+
+  </tr>
+  <tr>
+    <%@mixers.each do |x|%>
+      <td><a class="linein fxsen"></a>line in <%=x%></td>
+  <%end%>
+    <%@othermixers.each do |x|%>
+      <td><a class="linein fxsen">l line in <%=x%></td>
+  <%end%>
+
+  </tr>
+  <tr>
+    <%@mixers.each do |x|%>
+      <td><div class="gain mybal"></div>gain <%=x%></td>
+  <%end%>
+    <%@othermixers.each do |x|%>
+      <td><a class="linein fxsen">r line in <%=x%></td>
+  <%end%>
+
+  </tr>
+
+
+
+</table>
+<p>table partie bas</p>
+<table class="basdemonmixer">
+  <tr>
+    <%@mixers.each do |x|%>
+      <td><div class="fx myeq"></div>eq high <%=x%> - 12kHz</td>
+  <%end%>
+    <%@mixersA.each do |x|%>
+      <td><div class="fx myfx"></div>fx <%=x%></td>
+  <%end%>
+    <td rowspan="6" colspan="2">
+<table>
+  <tr>
+    
+    <td>phantom
+      <a class="active master-btn mybtn"></a>
     </td>
-    <td>
-    <a class="linein 2tr_out_r"></a>
-2 track
-    </td>
-        </tr>
-        <tr>
-      <td>
-        <div class="gain"  rotate-attribute="0deg"></div><!--1,2,3,4-->
-gain
-      </td>
-      <td>
-        <a class="linein"  ></a><!--5,8,10;12-->
-gain
-      </td>
-          <td>
-    <a class="linein 2tr_in_l"></a>
-          </td>
-          <td>
-    <a class="linein 2tr_in_r"></a>
-          </td>
-        </tr>
-
-    <a class="linein"></a>
-line in
-    <div class="gain"  rotate-attribute="0deg"></div>
-gain
-<hr>
-    <div class="low"  rotate-attribute="0deg"></div>
-low
-    <div class="mid" rotate-attribute="0deg"></div>
-mid
-    <div class="high" rotate-attribute="0deg"></div>
-high
-    <a class="low eq"></a>
-low eq
-    <div class="fx" rotate-attribute="0deg"></div>
-fx
-    <div class="ban" rotate-attribute="0deg"></div>
-ban
-    <div class="level" rotate-attribute="0deg"></div>
-level
-
-    <p>CH-</p>
-    <h4>HDB-600</h4>
-  </section>
-  <section class="ctrlroom">
-
-  </section>
-  <section class="my2track">
-
-  </section>
-  <section class="channel channel1">
-      <ul class="volume-bars">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>   
-    </ul> 
+    <td rowspan="5">volume
     <input class="volume" value="50" type="range" />
-    <input class="volume" value="50" type="range" />
-    <p>MASTER</p> 
-    <a class="active master-btn"></a>
+
     <ul>
       <li></li>
       <li></li>
@@ -127,124 +102,38 @@ level
       <li></li>   
     </ul> 
     <input class="slider master" value="50" type="range" />
-  </section>
-  <section class="regie">
-
-  </section>
-  <section class="maregie">
-<span>
-line in 
-    <a class="linein linein>"></a>
-    <div class="gain" rotate-attribute="0deg"></div>
-gain
-</span>
-  </section>
-
-
-
-  <section class="channel">
-
-<hr>
-    <a class="low eq"></a>
-low eq
-    <div class="fx" rotate-attribute="0deg"></div>
-fx
-    <div class="ban" rotate-attribute="0deg"></div>
-ban
-    <div class="level" rotate-attribute="0deg"></div>
-level
-
-    <p>CH-/linein+1</p>
-    <h4>HDB-600</h4>
-  </section>
-</table>
-<br>
-<table class="partiehautdemonmixer">
-  <tr>
-    <%@mixers.each do |x|%>
-      <td colspan="1" rowspan="2">mic <%=x%></td>
-  <%end%>
-    <td colspan="4">XENYX</td>
-    <td colspan="2" rowspan="4">
-      <table>
-        <tr><td colspan="2">ctrl room out</td></tr>
-  <tr>
-    <td>l</td>
-    <td>r</td>
-  </tr>
-  <tr>
-    <td>l</td>
-    <td>r out 2 track</td>
-  </tr>
-  <tr>
-    <td>l</td>
-    <td>r in</td>
-  </tr>
-      </table>
-
     </td>
-
-  </tr>
-  <tr>
-    <td>fx send</td>
-    <td>phones</td>
-    <td>main out l</td>
-    <td>r</td>
-
-  </tr>
-  <tr>
-    <%@mixers.each do |x|%>
-      <td>line in <%=x%></td>
-  <%end%>
-    <%@othermixers.each do |x|%>
-      <td>l line in <%=x%></td>
-  <%end%>
-
-  </tr>
-  <tr>
-    <%@mixers.each do |x|%>
-      <td>gain <%=x%></td>
-  <%end%>
-    <%@othermixers.each do |x|%>
-      <td>r line in <%=x%></td>
-  <%end%>
-
-  </tr>
-
-
-
-</table>
-<p>hello</p>
-<table class="basdemonmixer">
-  <tr>
-    <%@mixers.each do |x|%>
-      <td>eq high <%=x%> - 12kHz</td>
-  <%end%>
-    <%@mixersA.each do |x|%>
-      <td>fx <%=x%></td>
-  <%end%>
-    <td rowspan="6" colspan="2">
-<table>
-  <tr>
-    
-    <td>phantom</td>
-    <td rowspan="5">volume bars</td>
     </tr>
   <tr>
     
-    <td>fx send</td>
+    <td><div class="fx myfx"></div>fx send</td>
     </tr>
   <tr>
     
-    <td>2 tr to ctrl room 2 tr to mix</td>
+    <td class="mainsection"><table>
+        <tr>
+          <td>
+    <a class="active master-btn mybtn"></a>
+               2tr to ctrl room
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a class="active master-btn mybtn"></a>
+2 tr to mix
+          </td>
+        </tr>
+      </table> </td>
     </tr>
   <tr>
     
-    <td>fx to ctrl room</td>
+    <td>fx to ctrl room
+      <a class="active master-btn urbtn"></a>
+    </td>
     </tr>
   <tr>
     
-    <td>phones</td>
+    <td><div class="fx mylevel"></div>phones</td>
     </tr>
 </table>
 
@@ -254,36 +143,36 @@ level
   </tr>
   <tr>
     <%@mixers.each do |x|%>
-      <td>mid  <%=x%> - 2.5kHz</td>
+      <td><div class="fx myeq"></div>mid  <%=x%> - 2.5kHz</td>
   <%end%>
     <%@mixersA.each do |x|%>
-      <td><%=x%> 5/6</td>
+      <td><div class="fx myeq"></div>bal<%=x%> </td>
   <%end%>
   </tr>
   <tr>
     <%@mixers.each do |x|%>
-      <td>low <%=x%> - 80Hz</td>
+      <td><div class="fx myeq"></div>low <%=x%> - 80Hz</td>
   <%end%>
     <%@mixersA.each do |x|%>
-      <td>level <%=x%></td>
+      <td><div class="gain mygain"></div>level <%=x%></td>
   <%end%>
   </tr>
   <tr>
     <%(@mixers+@mixersB).each do |x|%>
-      <td><%=x%> FX</td>
+      <td><div class="fx myfx"></div><%=x%> FX</td>
   <%end%>
   </tr>
   <tr>
     <%@mixers.each do |x|%>
-      <td><%=x%> pan</td>
+      <td><div class="gain mypan"></div><%=x%> pan</td>
   <%end%>
     <%@mixersB.each do |x|%>
-      <td><%=x%> bal</td>
+      <td><div class="fx mybal"></div><%=x%> bal</td>
   <%end%>
   </tr>
   <tr>
     <%(@mixers+@mixersB).each do |x|%>
-      <td><%=x%> level</td>
+      <td><div class="gain mylevel"></div><%=x%> level</td>
   <%end%>
   </tr>
       </table>
@@ -711,7 +600,7 @@ $('.master').change(function () {
 const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 function generateString(length) {
-    let result = ' ';
+    let result = ' my';
     const charactersLength = characters.length;
     for ( let i = 0; i < length; i++ ) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
