@@ -2,15 +2,9 @@
 
 <h1>Mixers</h1>
 
-<table class="mixer">
-
-
-
-
-
-
-</table>
 <br>
+<!--debut de la table-->
+<%=form_with model: @mixer do |form|%>
 <table class="partiehautdemonmixer">
   <tr>
     <%@mixers.each do |x|%>
@@ -151,10 +145,15 @@
   </tr>
   <tr>
     <%@mixers.each do |x|%>
-      <td><div class="fx myeq"></div>low <%=x%> - 80Hz</td>
+      <td>
+        <%=form.hidden_field "mixer[mics_attributes][#{@mix[x]}][mic][low]"%>
+        <div class="fx myeq"></div>low <%=x%> - 80Hz</td>
   <%end%>
-    <%@mixersA.each do |x|%>
-      <td><div class="gain mygain"></div>level <%=x%></td>
+    <%@mixersA.each_with_index do |x|%>
+      <td>
+        <%=form.hidden_field "mixer[mics_attributes][#{@mix[x]}][mic][low]"%>
+
+        <div class="gain mygain"></div>level <%=x%></td>
   <%end%>
   </tr>
   <tr>
@@ -176,6 +175,8 @@
   <%end%>
   </tr>
       </table>
+      <!-- fin de la table-->
+    <%end%>
 
 
 

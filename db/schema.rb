@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_10_222657) do
+ActiveRecord::Schema.define(version: 2023_10_15_022126) do
+
+  create_table "mics", force: :cascade do |t|
+    t.boolean "mic"
+    t.boolean "line_in"
+    t.float "gain"
+    t.float "eq_high"
+    t.float "eq_mid"
+    t.float "eq_low"
+    t.boolean "low_cut"
+    t.float "fx"
+    t.float "ban"
+    t.float "level"
+    t.integer "mixer_id"
+    t.integer "nb"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "mixers", force: :cascade do |t|
     t.boolean "ctrf_room_out_l"
