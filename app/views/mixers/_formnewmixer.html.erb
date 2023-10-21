@@ -8,7 +8,10 @@
 <table class="partiehautdemonmixer">
   <tr>
     <%@mixers.each do |x|%>
-      <td colspan="1" rowspan="2"><a class="mic"></a>mic <%=x%></td>
+      <%str="mixer[mics_attributes][#{@mix[x]}][mic]"%>
+      <td colspan="1" rowspan="2"><a id="my_<%=str.parameterize%>" class="mic"></a>mic <%=x%>
+      <%=form.hidden_field str%>
+      </td>
   <%end%>
     <td colspan="4">XENYX</td>
     <td colspan="2" rowspan="4">
@@ -146,12 +149,13 @@
   <tr>
     <%@mixers.each do |x|%>
       <td>
-        <%=form.hidden_field "mixer[mics_attributes][#{@mix[x]}][mic][low]"%>
-        <div class="fx myeq"></div>low <%=x%> - 80Hz</td>
+        <%str= "mixer[mics_attributes][#{@mix[x]}][low]"%>
+        <%=form.hidden_field str%>
+        <div class="fx myeq" id="my_<%=str%>"></div>low <%=x%> - 80Hz</td>
   <%end%>
     <%@mixersA.each_with_index do |x|%>
       <td>
-        <%=form.hidden_field "mixer[mics_attributes][#{@mix[x]}][mic][low]"%>
+        <%=form.hidden_field "mixer[mics_attributes][#{@mix[x]}][low]"%>
 
         <div class="gain mygain"></div>level <%=x%></td>
   <%end%>
@@ -270,6 +274,23 @@
 <%=content_for :js do %>
 <script>
 $("a").click(function() {
+  const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function generateString(length) {
+    let result = ' my';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+    if (!$(this)[0].id){
+     $(this)[0].id=String(generateString(7)).replace(' ','');
+    }
+
+
   $(this).toggleClass("active");
 });
 
@@ -278,8 +299,24 @@ $(".master-btn").click(function() {
 });
 
 $('.master').change(function () {                 
+  const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function generateString(length) {
+    let result = ' my';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
   var Width = $(this).val();
   $('.volume').val(Width);
+      if (!$(this)[0].id){
+     $(this)[0].id=String(generateString(7)).replace(' ','');
+    }
+
+
 }); 
 </script>
 <script>
