@@ -80,7 +80,7 @@
       <a class="active master-btn mybtn"></a>
     </td>
     <td rowspan="5">volume
-    <input class="volume" value="50" type="range" />
+    <input class="volume" value="50" type="hidden" />
 
     <ul>
       <li></li>
@@ -140,10 +140,14 @@
   </tr>
   <tr>
     <%@mixers.each do |x|%>
-      <td><div class="fx myeq"></div>mid  <%=x%> - 2.5kHz</td>
+      <%str="mixer[mics_attributes][#{@mix[x]}][mid]"%>
+      <td><div class="fx myeq" id="my_<%=str.parameterize%>"></div>mid  <%=x%> - 2.5kHz
+
+        <%=form.hidden_field str%></td>
   <%end%>
     <%@mixersA.each do |x|%>
-      <td><div class="fx myeq"></div>bal<%=x%> </td>
+      <%str="mixer[mics_attributes][#{@mix[x]}][mid]"%>
+      <td><div class="fx myeq" id="my_<%=str.parameterize%>"></div>bal<%=x%> </td>
   <%end%>
   </tr>
   <tr>
@@ -151,13 +155,14 @@
       <td>
         <%str= "mixer[mics_attributes][#{@mix[x]}][low]"%>
         <%=form.hidden_field str%>
-        <div class="fx myeq" id="my_<%=str%>"></div>low <%=x%> - 80Hz</td>
+        <div class="fx myeq" id="my_<%=str.parameterize%>"></div>low <%=x%> - 80Hz</td>
   <%end%>
     <%@mixersA.each_with_index do |x|%>
+      <%str="mixer[mics_attributes][#{@mix[x]}][level]"%>
       <td>
-        <%=form.hidden_field "mixer[mics_attributes][#{@mix[x]}][low]"%>
+        <%=form.hidden_field str%>
 
-        <div class="gain mygain"></div>level <%=x%></td>
+        <div class="gain mygain" id="my_<%=str.parameterize%>"></div>level <%=x%></td>
   <%end%>
   </tr>
   <tr>
