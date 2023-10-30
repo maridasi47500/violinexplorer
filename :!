@@ -21,7 +21,7 @@
   <tr>
     <%@mixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][mic]"%>
-      <td colspan="1" rowspan="2"><a id="<%="find_"+str.parameterize.underscore%>" class="mic"></a>mic <%=x%>
+      <td colspan="1" rowspan="2"><a id="my_<%=str.parameterize.underscore%>" class="mic"></a>mic <%=x%>
       <%=hidden_field_tag str%>
       </td>
   <%end%>
@@ -30,16 +30,16 @@
       <table>
         <tr><td colspan="2">ctrl room out</td></tr>
   <tr>
-    <td><%str="mixer[ctrl_room_out_l]"%><%=hidden_field_tag str%><a id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>l</td>
-    <td><%str="mixer[ctrl_room_out_r]"%><%=hidden_field_tag str%><a id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>r</td>
+    <td><%str="mixer[ctrl_room_out_l]"%><%=hidden_field_tag str%><a id="<%=str.parameterize.underscore%>" class="linein"></a>l</td>
+    <td><%str="mixer[ctrl_room_out_r]"%><%=hidden_field_tag str%><a id="<%=str.parameterize.underscore%>" class="linein"></a>r</td>
   </tr>
   <tr>
-    <td><%str="mixer[_2tr_out_l]"%><%=hidden_field_tag str%><a id="<%="find_"+str.parameterize.underscore%>" class="linein "></a>l</td>
-    <td><%str="mixer[_2tr_out_r]"%><%=hidden_field_tag str%><a class="linein " id="<%="find_"+str.parameterize.underscore%>"></a>r out 2 track</td>
+    <td><%str="mixer[_2tr_out_l]"%><%=hidden_field_tag str%><a id="<%=str.parameterize.underscore%>" class="linein "></a>l</td>
+    <td><%str="mixer[_2tr_out_r]"%><%=hidden_field_tag str%><a class="linein " id="<%=str.parameterize.underscore%>"></a>r out 2 track</td>
   </tr>
   <tr>
-    <td><%str="mixer[_2tr_in_l]"%><%=hidden_field_tag str%><a id="<%="find_"+str.parameterize.underscore%>" class="linein "></a>l</td>
-    <td><%str="mixer[_2tr_in_r]"%><%=hidden_field_tag str%><a id="<%="find_"+str.parameterize.underscore%>" class="linein "></a>r in</td>
+    <td><%str="mixer[_2tr_in_l]"%><%=hidden_field_tag str%><a id="<%=str.parameterize.underscore%>" class="linein "></a>l</td>
+    <td><%str="mixer[_2tr_in_r]"%><%=hidden_field_tag str%><a id="<%=str.parameterize.underscore%>" class="linein "></a>r in</td>
   </tr>
       </table>
 
@@ -47,10 +47,10 @@
 
   </tr>
   <tr>
-    <td><%str="mixer[fx_send]"%><%=hidden_field_tag str%><a class="linein" id="<%="find_"+str.parameterize.underscore%>"></a>fx send</td>
-    <td><%str="mixer[phones]"%><%=hidden_field_tag str%><a class="linein " id="<%="find_"+str.parameterize.underscore%>"></a>phones</td>
-    <td><%str="mixer[main_out_l]"%><%=hidden_field_tag str%><a id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>main out l</td>
-    <td><%str="mixer[main_out_r]"%><%=hidden_field_tag str%><a id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>r</td>
+    <td><%str="mixer[fx_send]"%><%=hidden_field_tag str%><a class="linein" id="<%=str.parameterize.underscore%>"></a>fx send</td>
+    <td><%str="mixer[phones]"%><%=hidden_field_tag str%><a class="linein " id="<%=str.parameterize.underscore%>"></a>phones</td>
+    <td><%str="mixer[main_out_l]"%><%=hidden_field_tag str%><a id="<%=str.parameterize.underscore%>" class="linein"></a>main out l</td>
+    <td><%str="mixer[main_out_r]"%><%=hidden_field_tag str%><a id="<%=str.parameterize.underscore%>" class="linein"></a>r</td>
 
   </tr>
   <tr>
@@ -60,7 +60,7 @@
       <td>
       <%=hidden_field_tag str%>
 
-        <a class="linein fxsen" id="<%="find_"+str.parameterize.underscore%>"></a>line in <%=x%></td>
+        <a class="linein fxsen" id="<%=str.parameterize.underscore%>"></a>line in <%=x%></td>
   <%end%>
     <%@othermixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][l_line_in]"%>
@@ -68,7 +68,7 @@
       <td>
       <%=hidden_field_tag str%>
 
-      <a class="linein fxsen" id="<%="find_"+str.parameterize.underscore%>">l line in <%=x%></td>
+      <a class="linein fxsen" id="<%=str.parameterize.underscore%>">l line in <%=x%></td>
   <%end%>
 
   </tr>
@@ -79,14 +79,14 @@
 
         <%=hidden_field_tag str%>
 
-        <div class="gain mybal" id="<%="find_"+str.parameterize.underscore%>"></div>gain <%=x%></td>
+        <div class="gain mybal" id="<%=str.parameterize.underscore%>"></div>gain <%=x%></td>
   <%end%>
     <%@othermixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][r_line_in]"%>
       <td>
         <%=hidden_field_tag str%>
 
-        <a class="linein fxsen" id="<%="find_"+str.parameterize.underscore%>">r line in <%=x%></td>
+        <a class="linein fxsen" id="<%=str.parameterize.underscore%>">r line in <%=x%></td>
   <%end%>
 
   </tr>
@@ -102,11 +102,11 @@
       <td>
 
         <%=hidden_field_tag str%>
-        <div class="fx myeq" id="<%="find_"+str.parameterize.underscore%>"></div>eq high <%=x%> - 12kHz</td>
+        <div class="fx myeq" id="<%=str.parameterize.underscore%>"></div>eq high <%=x%> - 12kHz</td>
   <%end%>
     <%@mixersA.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][fx]"%>
-      <td><%=hidden_field_tag str%><div class="fx myfx" id="<%="find_"+str.parameterize.underscore%>"></div>fx <%=x%></td>
+      <td><%=hidden_field_tag str%><div class="fx myfx" id="<%=str.parameterize.underscore%>"></div>fx <%=x%></td>
   <%end%>
     <td rowspan="6" colspan="2">
 <table>
@@ -114,10 +114,10 @@
     
     <td>phantom
       <%str="mixer[phantom]"%><%=hidden_field_tag str%>
-      <a class="active master-btn mybtn" id="<%="find_"+str.parameterize.underscore%>"></a>
+      <a class="active master-btn mybtn" id="<%=str.parameterize.underscore%>"></a>
     </td>
     <td rowspan="5"><%str="mixer[main_mix_value]"%><%=hidden_field_tag str%>volume
-      <input class="volume" value="50" id="<%="find_"+str.parameterize.underscore%>" type="hidden" />
+      <input class="volume" value="50" id="<%=str.parameterize.underscore%>" type="hidden" />
 
     <ul>
       <li></li>
@@ -140,7 +140,7 @@
     </tr>
   <tr>
     
-    <td><%str="mixer[fx_send_value]"%><%=hidden_field_tag str%><div id="<%="find_"+str.parameterize.underscore%>" class="fx myfx"></div>fx send</td>
+    <td><%str="mixer[fx_send_value]"%><%=hidden_field_tag str%><div id="<%=str.parameterize.underscore%>" class="fx myfx"></div>fx send</td>
     </tr>
   <tr>
     
@@ -148,14 +148,14 @@
         <tr>
           <td>
             <%str="mixer[_2tr_to_ctrl_room]"%><%=hidden_field_tag str%>
-            <a class="active master-btn mybtn" id="<%="find_"+str.parameterize.underscore%>"></a>
+            <a class="active master-btn mybtn" id="<%=str.parameterize.underscore%>"></a>
                2tr to ctrl room
           </td>
         </tr>
         <tr>
           <td>
             <%str="mixer[2_tr_to_mix]"%><%=hidden_field_tag str%>
-            <a class="active master-btn mybtn" id="<%="find_"+str.parameterize.underscore%>"></a>
+            <a class="active master-btn mybtn" id="<%=str.parameterize.underscore%>"></a>
 2 tr to mix
           </td>
         </tr>
@@ -164,7 +164,7 @@
   <tr>
     
     <td><%str="mixer[fx_to_ctrl_room]"%><%=hidden_field_tag str%>fx to ctrl room
-      <a class="active master-btn urbtn" id="<%="find_"+str.parameterize.underscore%>"></a>
+      <a class="active master-btn urbtn" id="<%=str.parameterize.underscore%>"></a>
     </td>
     </tr>
   <tr>
@@ -173,7 +173,7 @@
 
       <%str="mixer[phones_value]"%>
       <%=hidden_field_tag str%>
-      <div class="fx mylevel" id="<%="find_"+str.parameterize.underscore%>"></div>
+      <div class="fx mylevel" id="<%=str.parameterize.underscore%>"></div>
 
 
       phones</td>
@@ -187,13 +187,13 @@
   <tr>
     <%@mixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][mid]"%>
-      <td><div class="fx myeq" id="<%="find_"+str.parameterize.underscore%>"></div>mid  <%=x%> - 2.5kHz
+      <td><div class="fx myeq" id="my_<%=str.parameterize.underscore%>"></div>mid  <%=x%> - 2.5kHz
 
         <%=hidden_field_tag str%></td>
   <%end%>
     <%@mixersA.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][mid]"%>
-      <td><div class="fx myeq" id="<%="find_"+str.parameterize.underscore%>"></div>bal<%=x%> </td>
+      <td><div class="fx myeq" id="my_<%=str.parameterize.underscore%>"></div>bal<%=x%> </td>
   <%end%>
   </tr>
   <tr>
@@ -201,14 +201,14 @@
       <td>
         <%str= "mixer[mics_attributes][#{@mix[x]}][low]"%>
         <%=hidden_field_tag str%>
-        <div class="fx myeq" id="<%="find_"+str.parameterize.underscore%>"></div>low <%=x%> - 80Hz</td>
+        <div class="fx myeq" id="my_<%=str.parameterize.underscore%>"></div>low <%=x%> - 80Hz</td>
   <%end%>
     <%@mixersA.each_with_index do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][level]"%>
       <td>
         <%=hidden_field_tag str%>
 
-        <div class="gain mygain" id="<%="find_"+str.parameterize.underscore%>"></div>level <%=x%></td>
+        <div class="gain mygain" id="my_<%=str.parameterize.underscore%>"></div>level <%=x%></td>
   <%end%>
   </tr>
   <tr>
@@ -216,7 +216,7 @@
       <%str="mixer[mics_attributes][#{@mix[x]}][fx]"%>
       <td>
         <%=hidden_field_tag str%>
-        <div class="fx myfx" id="<%="find_"+str.parameterize.underscore%>"></div><%=x%> FX</td>
+        <div class="fx myfx" id="<%=str.parameterize.underscore%>"></div><%=x%> FX</td>
   <%end%>
   </tr>
   <tr>
@@ -224,21 +224,21 @@
       <%str="mixer[mics_attributes][#{@mix[x]}][pan]"%>
       <td>
         <%=hidden_field_tag str%>
-        <div class="gain mypan" id="<%="find_"+str.parameterize.underscore%>"></div><%=x%> pan</td>
+        <div class="gain mypan" id="<%=str.parameterize.underscore%>"></div><%=x%> pan</td>
   <%end%>
     <%@mixersB.each do |x|%>
       <td>
         <%str="mixer[mics_attributes][#{@mix[x]}][bal]"%>
         <%=hidden_field_tag str%>
 
-        <div class="fx mybal" id="<%="find_"+str.parameterize.underscore%>"></div><%=x%> bal</td>
+        <div class="fx mybal" id="<%=str.parameterize.underscore%>"></div><%=x%> bal</td>
   <%end%>
   </tr>
   <tr>
     <%(@mixers+@mixersB).each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][fx]"%>
       <%=hidden_field_tag str%>
-      <td><div class="gain mylevel" id="<%="find_"+str.parameterize.underscore%>"></div><%=x%> level</td>
+      <td><div class="gain mylevel" id="<%=str.parameterize.underscore%>"></div><%=x%> level</td>
   <%end%>
   </tr>
       </table>
@@ -354,9 +354,7 @@ function generateString(length) {
     }
 
 
-
   $(this).toggleClass("active");
-$("#"+String($(this)[0].id).replace("find_",""))[0].value=$(this).hasClass("active") ? 1 : 0;
 });
 
 $(".master-btn").click(function() {
@@ -380,7 +378,6 @@ function generateString(length) {
       if (!$(this)[0].id){
      $(this)[0].id=String(generateString(7)).replace(' ','');
     }
-$("#"+String($(this)[0].id).replace("find_",""))[0].value=Width;
 
 
 }); 
@@ -792,7 +789,7 @@ var res;
     }
 
 $('.mycss'+String(e.target.id).replace(' ','')).remove();
-  $("#"+String(e.target.id).replace("find_",""))[0].value=res;
+  $("#"+String(e.target.id).replace("find_","")).val();
 $('head').append('<style rel="stylesheet" class="mycss'+String(e.target.id).replace(' ','')+'">#'+String(e.target.id).replace(' ','')+'::after{transform:rotate('+String(res)+'deg);}</style>');
 
 });
