@@ -148,14 +148,14 @@
         <tr>
           <td>
             <%str="mixer[_2tr_to_ctrl_room]"%><%=hidden_field_tag str%>
-            <a class="active master-btn mybtn" id="<%="find_"+str.parameterize.underscore%>"></a>
+            <a class="<%=mixer._2tr_to_ctrl_room ? "active" : ""%> master-btn mybtn" id="<%="find_"+str.parameterize.underscore%>"></a>
                2tr to ctrl room
           </td>
         </tr>
         <tr>
           <td>
             <%str="mixer[2_tr_to_mix]"%><%=hidden_field_tag str%>
-            <a class="active master-btn mybtn" id="<%="find_"+str.parameterize.underscore%>"></a>
+            <a class="<%=mixer._2tr_to_mix ? "active" : ""%> master-btn mybtn" id="<%="find_"+str.parameterize.underscore%>"></a>
 2 tr to mix
           </td>
         </tr>
