@@ -1,29 +1,14 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Mixers</h1>
+<h1><%=mixer.name%></h1>
+<img src="/uploads/<%=mixer.image%>" class="picmixer"/>
 
 <br>
 <!--debut de la table-->
-<%=form_with model: @mixer do |form|%>
-  <div class="field">
-  <%=form.label :name%>
-  <%=form.text_field :name%>
-  </div>
-  <div class="field">
-  <%=form.label :image%>
-  <%=form.file_field :image%>
-
-  </div>
-  <div class="actions">
-  <%=form.submit "créer le mixer"%>
-  </div>
 <table class="partiehautdemonmixer">
   <tr>
     <%@mixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][mic]"%>
-
-      <td colspan="1" rowspan="2"><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="mic  <%=@mixer.mics[@mix[x]].mic ? "active" : ""%>"></a>mic <%=x%>
-      <%=hidden_field_tag str%>
+      <td colspan="1" rowspan="2"><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" data-name="<%=str%>" class="mic <%=@mixer.mics[@mix[x]].mic ? "active" : ""%>"></a>mic <%=x%>
       </td>
   <%end%>
     <td colspan="4">XENYX</td>
@@ -31,16 +16,16 @@
       <table>
         <tr><td colspan="2">ctrl room out</td></tr>
   <tr>
-    <td><%str="mixer[ctrl_room_out_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>l</td>
-    <td><%str="mixer[ctrl_room_out_r]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>r</td>
+    <td><%str="mixer[ctrl_room_out_l]"%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" data-name="<%=str%>" class="linein <%=@mixer.ctrl_room_out_l ? "active" : ""%>"></a>l</td>
+    <td><%str="mixer[ctrl_room_out_r]"%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" data-name="<%=str%>" class="linein <%=@mixer.ctrl_room_out_r ? "active" : ""%>"></a>r</td>
   </tr>
   <tr>
-    <td><%str="mixer[_2tr_out_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein "></a>l</td>
-    <td><%str="mixer[_2tr_out_r]"%><%=hidden_field_tag str%><a class="linein " data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>r out 2 track</td>
+    <td><%str="mixer[_2tr_out_l]"%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" data-name="<%=str%>" class="linein <%=@mixer._2tr_out_l ? "active" : ""%>"></a>l</td>
+    <td><%str="mixer[_2tr_out_r]"%><a class="linein  <%=@mixer._2tr_out_r ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>r out 2 track</td>
   </tr>
   <tr>
-    <td><%str="mixer[_2tr_in_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein "></a>l</td>
-    <td><%str="mixer[_2tr_in_r]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein "></a>r in</td>
+    <td><%str="mixer[_2tr_in_l]"%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"  class="linein  <%=@mixer._2tr_in_l ? "active" : ""%>"></a>l</td>
+    <td><%str="mixer[_2tr_in_r]"%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" data-name="<%=str%>" class="linein <%=@mixer._2tr_in_r ? "active" : ""%> "></a>r in</td>
   </tr>
       </table>
 
@@ -48,10 +33,10 @@
 
   </tr>
   <tr>
-    <td><%str="mixer[fx_send]"%><%=hidden_field_tag str%><a class="linein" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>fx send</td>
-    <td><%str="mixer[phones]"%><%=hidden_field_tag str%><a class="linein " data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>phones</td>
-    <td><%str="mixer[main_out_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>main out l</td>
-    <td><%str="mixer[main_out_r]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>r</td>
+    <td><%str="mixer[fx_send]"%><a class="linein <%=@mixer.fx_send ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>fx send</td>
+    <td><%str="mixer[phones]"%><a class="linein <%=@mixer.phones ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>phones</td>
+    <td><%str="mixer[main_out_l]"%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" data-name="<%=str%>" class="linein <%=@mixer.main_out_l ? "active" : ""%>"></a>main out l</td>
+    <td><%str="mixer[main_out_r]"%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" data-name="<%=str%>" class="linein <%=@mixer.main_out_r ? "active" : ""%>"></a>r</td>
 
   </tr>
   <tr>
@@ -59,17 +44,17 @@
       <%str="mixer[mics_attributes][#{@mix[x]}][line_in]"%>
 
       <td>
-      <%=hidden_field_tag str%>
+      
 
-        <a class="linein fxsen" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>line in <%=x%></td>
+        <a class="linein fxsen <%=@mixer.mics[@mix[x]].line_in ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>line in <%=x%></td>
   <%end%>
     <%@othermixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][l_line_in]"%>
 
       <td>
-      <%=hidden_field_tag str%>
+      
 
-      <a class="linein fxsen" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>">l line in <%=x%></td>
+      <a class="linein fxsen <%=@mixer.mics[@mix[x]].l_line_in ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>">l line in <%=x%></td>
   <%end%>
 
   </tr>
@@ -78,16 +63,16 @@
       <%str="mixer[mics_attributes][#{@mix[x]}][gain]"%>
       <td>
 
-        <%=hidden_field_tag str%>
+        
 
-        <div class="gain mybal" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>gain <%=x%></td>
+        <div class="gain mybal <%=@mixer.mics[@mix[x]].gain ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>gain <%=x%></td>
   <%end%>
     <%@othermixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][r_line_in]"%>
       <td>
-        <%=hidden_field_tag str%>
+        
 
-        <a class="linein fxsen" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>">r line in <%=x%></td>
+        <a class="linein fxsen <%=@mixer.mics[@mix[x]].r_line_in ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>">r line in <%=x%></td>
   <%end%>
 
   </tr>
@@ -102,23 +87,23 @@
       <%str="mixer[mics_attributes][#{@mix[x]}][eq_high]"%>
       <td>
 
-        <%=hidden_field_tag str%>
+        
         <div class="fx myeq" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>eq high <%=x%> - 12kHz</td>
   <%end%>
     <%@mixersA.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][fx]"%>
-      <td><%=hidden_field_tag str%><div class="fx myfx" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>fx <%=x%></td>
+      <td><div class="fx myfx" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>fx <%=x%></td>
   <%end%>
     <td rowspan="6" colspan="2">
 <table>
   <tr>
     
     <td>phantom
-      <%str="mixer[phantom]"%><%=hidden_field_tag str%>
+      <%str="mixer[phantom]"%>
       <a class="<%=mixer.phantom ? "active" : ""%> master-btn mybtn" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>
     </td>
-    <td rowspan="5"><%str="mixer[main_mix_value]"%><%=hidden_field_tag str%>volume
-      <input class="volume" value="50" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" name="mixer[main_mix_value]" type="hidden" />
+    <td rowspan="5"><%str="mixer[main_mix_value]"%>volume
+      <input class="volume" value="50" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" data-name="<%=str%>" type="hidden" />
 
     <ul>
       <li></li>
@@ -136,26 +121,26 @@
       <li></li>
       <li></li>   
     </ul> 
-    <input class="slider master" value="50" type="range" />
+    <%=range_field_tag "level",mixer.main_mix_value,  class:"slider master" %>
     </td>
     </tr>
   <tr>
     
-    <td><%str="mixer[fx_send_value]"%><%=hidden_field_tag str%><div data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="fx myfx"></div>fx send</td>
+    <td><%str="mixer[fx_send_value]"%><div data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" data-name="<%=str%>" class="fx myfx"></div>fx send</td>
     </tr>
   <tr>
     
     <td class="mainsection"><table>
         <tr>
           <td>
-            <%str="mixer[_2tr_to_ctrl_room]"%><%=hidden_field_tag str%>
+            <%str="mixer[_2tr_to_ctrl_room]"%>
             <a class="<%=mixer._2tr_to_ctrl_room ? "active" : ""%> master-btn mybtn" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>
                2tr to ctrl room
           </td>
         </tr>
         <tr>
           <td>
-            <%str="mixer[_2tr_to_mix]"%><%=hidden_field_tag str%>
+            <%str="mixer[_2_tr_to_mix]"%>
             <a class="<%=mixer._2tr_to_mix ? "active" : ""%> master-btn mybtn" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>
 2 tr to mix
           </td>
@@ -164,7 +149,7 @@
     </tr>
   <tr>
     
-    <td><%str="mixer[fx_to_ctrl_room]"%><%=hidden_field_tag str%>fx to ctrl room
+    <td><%str="mixer[fx_to_ctrl_room]"%>fx to ctrl room
       <a class="<%=mixer.fx_to_ctrl_room ? "active" : ""%> master-btn urbtn" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>
     </td>
     </tr>
@@ -173,7 +158,7 @@
     <td>
 
       <%str="mixer[phones_value]"%>
-      <%=hidden_field_tag str%>
+      
       <div class="fx mylevel" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>
 
 
@@ -188,14 +173,14 @@
   <tr>
     <%@mixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][eq_mid]"%>
-      <%=hidden_field_tag str%>
+      
       <td><div class="fx myeq" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>mid  <%=x%> - 2.5kHz
 
         </td>
   <%end%>
     <%@mixersA.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][bal]"%>
-      <%=hidden_field_tag str%>
+      
       <td><div class="fx myeq" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>bal<%=x%> </td>
   <%end%>
   </tr>
@@ -203,13 +188,13 @@
     <%@mixers.each do |x|%>
       <td>
         <%str= "mixer[mics_attributes][#{@mix[x]}][eq_low]"%>
-        <%=hidden_field_tag str%>
+        
         <div class="fx myeq" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>low <%=x%> - 80Hz</td>
   <%end%>
     <%@mixersA.each_with_index do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][level]"%>
-      <%=hidden_field_tag str%>
       <td>
+        
 
         <div class="gain mygain" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>level <%=x%></td>
   <%end%>
@@ -217,22 +202,22 @@
   <tr>
     <%(@mixers+@mixersB).each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][fx]"%>
-      <%=hidden_field_tag str%>
       <td>
+        
         <div class="fx myfx" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div><%=x%> FX</td>
   <%end%>
   </tr>
   <tr>
     <%@mixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][pan]"%>
-      <%=hidden_field_tag str%>
       <td>
+        
         <div class="gain mypan" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div><%=x%> pan</td>
   <%end%>
     <%@mixersB.each do |x|%>
       <td>
         <%str="mixer[mics_attributes][#{@mix[x]}][bal]"%>
-        <%=hidden_field_tag str%>
+        
 
         <div class="fx mybal" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div><%=x%> bal</td>
   <%end%>
@@ -240,13 +225,12 @@
   <tr>
     <%(@mixers+@mixersB).each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][level]"%>
-      <%=hidden_field_tag str%>
+      
       <td><div class="gain mylevel" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div><%=x%> level</td>
   <%end%>
   </tr>
       </table>
       <!-- fin de la table-->
-    <%end%>
 
 
 
@@ -338,9 +322,14 @@
 			</div>
 		</div>
 <%=content_for :js do %>
+  <%=render 'js'%>
 <script>
-$("a:not(input)").click(function() {
   const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+
+
+
+
 
 function generateString(length) {
     let result = ' my';
@@ -351,42 +340,6 @@ function generateString(length) {
 
     return result;
 }
-
-    if (!$(this)[0].id){
-     $(this)[0].id=String(generateString(7)).replace(' ','');
-    }
-
-
-
-  $(this).toggleClass("active");
-$("#"+String($(this)[0].id).replace("find_",""))[0].value=$(this).hasClass("active") ? 1 : 0;
-});
-
-$(".master-btn").click(function() {
-  $('.volume').toggleClass("dim");
-});
-
-$('.master').change(function () {                 
-  const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-function generateString(length) {
-    let result = ' my';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-
-    return result;
-}
-  var Width = $(this).val();
-  $('.volume').val(Width);
-      if (!$(this)[0].id){
-     $(this)[0].id=String(generateString(7)).replace(' ','');
-    }
-$("#"+String($(this)[0].id).replace("find_",""))[0].value=Width;
-
-
-}); 
 </script>
 <script>
 			"use strict";
@@ -701,10 +654,7 @@ $("#"+String($(this)[0].id).replace("find_",""))[0].value=Width;
 			const DEGREE = "\u00B0";
 		</script>
 <script>
-// program to generate random strings
-
 // declare all characters
-const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 function generateString(length) {
     let result = ' my';
@@ -715,116 +665,17 @@ function generateString(length) {
 
     return result;
 }
-// Helper function to get an element's exact position
-function getPosition(el) {
-  var xPos = 0;
-  var yPos = 0;
- 
-  while (el) {
-    if (el.tagName == "BODY") {
-      // deal with browser quirks with body/window/document and page scroll
-      var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-      var yScroll = el.scrollTop || document.documentElement.scrollTop;
- 
-      xPos += (el.offsetLeft - xScroll + el.clientLeft);
-      yPos += (el.offsetTop - yScroll + el.clientTop);
-    } else {
-      // for all other non-BODY elements
-      xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
-      yPos += (el.offsetTop - el.scrollTop + el.clientTop);
-    }
- 
-    el = el.offsetParent;
-  }
-  return {
-    x: xPos,
-    y: yPos
-  };
-}
 
 console.log(generateString(5));
 $(function(){
 
-$("div:not(.field, .actions)").click(function(e){
-    //var posX = $(this).offset().left, posY = $(this).offset().top;
-    //var posX = e.clientX, posY = e.clientY;
-    var parentPosition = getPosition(e.currentTarget);
-    var posX = e.clientX ;
-    var posY = e.clientY ;
-let rect = e.target.getBoundingClientRect();
-    var width = e.target.clientWidth, height = e.target.clientHeight;
-    console.log("height: "+ height +" width: "+ width);
-console.log("top"+rect.top+", left: "+rect.left)
-    var coorx=(posX) - (width/2) - rect.left;
-    var coory=(posY) - (height/2) - rect.top;
-var res;
-    console.log("coorx: "+ coorx +"coory: "+ coory +"// e.pageX: " + e.pageX + " posX:" + posX + " e.pageY:" + e.pageY + " posY:" + posY);
-    if (coorx > 0 && coory < 0){
-    document.getElementById("sideBin").value=Math.abs(coory);
-    document.getElementById("sideCin").value=Math.abs(coorx);
-    document.getElementById("angleAin").value="90";
-    doSolve();
-    res=parseFloat(document.getElementById("angleCout").innerHTML.replace("°",""));
-
-    document.getElementById("triangleform").reset();
-    } else if (coorx > 0 && coory > 0){
-    document.getElementById("sideBin").value=Math.abs(coorx);
-    document.getElementById("sideCin").value=Math.abs(coory);
-    document.getElementById("angleAin").value="90";
-    doSolve();
-    res=parseFloat(document.getElementById("angleCout").innerHTML.replace("°",""))+90.0;
-    document.getElementById("triangleform").reset();
-    } else if (coorx < 0 && coory > 0){
-    document.getElementById("sideCin").value=Math.abs(coory);
-    document.getElementById("sideAin").value=Math.abs(coorx);
-    document.getElementById("angleBin").value="90";
-    doSolve();
-    res=parseFloat(document.getElementById("angleAout").innerHTML.replace("°",""))+180.0;
-    document.getElementById("triangleform").reset();
-    } else if (coorx < 0 && coory < 0){
-    document.getElementById("sideBin").value=Math.abs(coory);
-    document.getElementById("sideAin").value=Math.abs(coorx);
-    document.getElementById("angleCin").value="90";
-    doSolve();
-    res=parseFloat(document.getElementById("angleBout").innerHTML.replace("°",""))+270.0;
-    document.getElementById("triangleform").reset();
-    }
-      if (res < 195.0 && res >= 180.0){
-
-        res=195.0;
-        console.log("res au min",res);
-      }else if(res < 180.0 && res > 165.0){
-
-        res=165.0;
-        console.log("res au max", res);
-      }else{
-        console.log("res a sa valeur", res);
-
-      }
-
-    console.log("res "+res+" e.pageX: " + e.pageX + " posX:" + posX + " e.pageY:" + e.pageY + " posY:" + posY);
-    if (!e.target.id){
-     e.target.id=String(generateString(7)).replace(' ','');
-    }
-
-$('.mycss'+String(e.target.id).replace(' ','')).remove();
-  $("#"+String(e.target.id).replace("find_",""))[0].value=res;
-$('head').append('<style rel="stylesheet" class="mycss'+String(e.target.id).replace(' ','')+'">#'+String(e.target.id).replace(' ','')+'::after{transform:rotate('+String(res)+'deg);}</style>');
-
-});
 $("div:not(.field, .actions)[id*='find_']").each(function(){
 console.log("this", $(this));
-<%if params[:action] == "new"%>
+<%if params[:action] == "show"%>
 
-var res=195.0;
-$('.mycss'+String($(this)[0].id).replace(' ','')).remove();
-  console.log("input:",$("#"+String($(this)[0].id).replace("find_","")))
-  $("#"+String($(this)[0].id).replace("find_",""))[0].value=res;
-$('head').append('<style rel="stylesheet" class="mycss'+String($(this)[0].id).replace(' ','')+'">#'+String($(this)[0].id).replace(' ','')+'::after{transform:rotate('+String(res)+'deg);}</style>');
-
-<%elsif params[:action] == "edit"%>
-  var mymixer=<%=raw @mymixer.to_json%>;
-  var myname=$("#"+$(this)[0].id.replace("find_",""))[0].name.split("[");
+  var mymixer=<%= raw @mymixer.to_json%>;
+  var myname=$(this)[0].dataset.name.split("[");
+    console.log(myname);
   var res;
   var str1,str2,str3;
   if (myname.length === 2){
@@ -832,11 +683,15 @@ $('head').append('<style rel="stylesheet" class="mycss'+String($(this)[0].id).re
   res=mymixer[str1];
   
   } else if (myname.length === 4){
-  str1=myname[1].split("]")[0];
-    str2=Number(myname[2].split("]")[0]);
 
+  str1=myname[1].split("]")[0];
+  str2=Number(myname[2].split("]")[0]);
   str3=myname[3].split("]")[0];
 
+  console.log("1)", mymixer[str1]);
+  console.log("2)", mymixer[str1][str2]);
+  console.log("3)", mymixer[str1][str2][str3]);
+  console.log([str1,str2,str3]);
   res=mymixer[str1][str2][str3];
   
   }

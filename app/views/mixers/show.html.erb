@@ -1,4 +1,4 @@
 <p id="notice"><%= notice %></p>
-<%=render @mixer%>
+<%=render "mixers/showmixer", mixer: @mixer%>
 <%= link_to 'Edit', edit_mixer_path(@mixer) %> |
 <%= link_to 'Back', mixers_path %>

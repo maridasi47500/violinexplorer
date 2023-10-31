@@ -19,14 +19,19 @@ class MixersController < ApplicationController
     end
     @mixersA=["5/6", "9/10"]
     @mixersB=["7/8", "11/12"]
+    
     @mixers=1.upto(4).to_a
     @othermixers=["5/6", "7/8", "9/10", "11/12"]
     @mix=(@mixers+@othermixers).map.with_index.to_h
+    @mymixer=@mixer.as_json
+    x = Hash[("0"..."8").zip @mixer.mics]
+    @mymixer['mics_attributes']=x
 
   end
 
   # GET /mixers/1/edit
   def edit
+
   end
 
   # POST /mixers or /mixers.json
@@ -71,11 +76,20 @@ class MixersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_mixer
       @mixer = Mixer.find(params[:id])
+      @mixersA=["5/6", "9/10"]
+      @mixersB=["7/8", "11/12"]
+      
+      @mixers=1.upto(4).to_a
+      @othermixers=["5/6", "7/8", "9/10", "11/12"]
+      @mix=(@mixers+@othermixers).map.with_index.to_h
+      @mymixer=@mixer.as_json
+      x = Hash[("0"..."8").zip @mixer.mics]
+      @mymixer['mics_attributes']=x
     end
 
     # Only allow a list of trusted parameters through.
     def mixer_params
-            params.require(:mixer).permit(:ctrl_room_out_l, :ctrl_room_out_r, :_2tr_out_r, :_2tr_out_l, :_2tr_in_r, :_2tr_in_l, :main_out_l, :main_out_r, :phones, :fx_send, :phantom, :fx_send_value, :_2tr_to_ctrl_room, :_2tr_to_mix, :fx_to_ctrl_room, :phones_value, :main_mix_value, :song_id,:image,:name,:mics_attributes=>{})
+            params.require(:mixer).permit(:_2_tr_to_mix,:ctrl_room_out_l, :ctrl_room_out_r, :_2tr_out_r, :_2tr_out_l, :_2tr_in_r, :_2tr_in_l, :main_out_l, :main_out_r, :phones, :fx_send, :phantom, :fx_send_value, :_2tr_to_ctrl_room, :_2tr_to_mix, :fx_to_ctrl_room, :phones_value, :main_mix_value, :song_id,:image,:name,:mics_attributes=>{})
 
     end
 end
