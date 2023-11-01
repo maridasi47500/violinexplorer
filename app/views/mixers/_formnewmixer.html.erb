@@ -31,16 +31,16 @@
       <table>
         <tr><td colspan="2">ctrl room out</td></tr>
   <tr>
-    <td><%str="mixer[ctrl_room_out_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>l</td>
-    <td><%str="mixer[ctrl_room_out_r]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>r</td>
+    <td><%str="mixer[ctrl_room_out_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein <%=mixer.ctrl_room_out_l ? "active" : ""%>"></a>l</td>
+    <td><%str="mixer[ctrl_room_out_r]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein <%=mixer.ctrl_room_out_r ? "active" : ""%>"></a>r</td>
   </tr>
   <tr>
-    <td><%str="mixer[_2tr_out_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein "></a>l</td>
-    <td><%str="mixer[_2tr_out_r]"%><%=hidden_field_tag str%><a class="linein " data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>r out 2 track</td>
+    <td><%str="mixer[_2tr_out_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein <%=mixer._2tr_out_l ? "active" : ""%> "></a>l</td>
+    <td><%str="mixer[_2tr_out_r]"%><%=hidden_field_tag str%><a class="linein  <%=mixer._2tr_out_r ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>r out 2 track</td>
   </tr>
   <tr>
-    <td><%str="mixer[_2tr_in_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein "></a>l</td>
-    <td><%str="mixer[_2tr_in_r]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein "></a>r in</td>
+    <td><%str="mixer[_2tr_in_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein  <%=mixer._2tr_in_l ? "active" : ""%>"></a>l</td>
+    <td><%str="mixer[_2tr_in_r]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein <%=mixer._2tr_in_r ? "active" : ""%> "></a>r in</td>
   </tr>
       </table>
 
@@ -48,10 +48,10 @@
 
   </tr>
   <tr>
-    <td><%str="mixer[fx_send]"%><%=hidden_field_tag str%><a class="linein" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>fx send</td>
-    <td><%str="mixer[phones]"%><%=hidden_field_tag str%><a class="linein " data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>phones</td>
-    <td><%str="mixer[main_out_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>main out l</td>
-    <td><%str="mixer[main_out_r]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein"></a>r</td>
+    <td><%str="mixer[fx_send]"%><%=hidden_field_tag str%><a class="linein <%=mixer.fx_send ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>fx send</td>
+    <td><%str="mixer[phones]"%><%=hidden_field_tag str%><a class="linein <%=mixer.phones ? "active" : ""%> " data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>phones</td>
+    <td><%str="mixer[main_out_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein <%=mixer.main_out_l ? "active" : ""%>"></a>main out l</td>
+    <td><%str="mixer[main_out_r]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein <%=mixer.main_out_r ? "active" : ""%>"></a>r</td>
 
   </tr>
   <tr>
@@ -61,7 +61,7 @@
       <td>
       <%=hidden_field_tag str%>
 
-        <a class="linein fxsen" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>line in <%=x%></td>
+      <a class="linein fxsen <%=mixer.mics[@mix[x]].line_in ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>line in <%=x%></td>
   <%end%>
     <%@othermixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][l_line_in]"%>
@@ -69,7 +69,7 @@
       <td>
       <%=hidden_field_tag str%>
 
-      <a class="linein fxsen" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>">l line in <%=x%></td>
+      <a class="linein fxsen  <%=mixer.mics[@mix[x]].l_line_in ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>">l line in <%=x%></td>
   <%end%>
 
   </tr>
@@ -87,7 +87,7 @@
       <td>
         <%=hidden_field_tag str%>
 
-        <a class="linein fxsen" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>">r line in <%=x%></td>
+        <a class="linein fxsen <%=mixer.mics[@mix[x]].r_line_in ? "active" : ""%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>">r line in <%=x%></td>
   <%end%>
 
   </tr>
@@ -118,7 +118,7 @@
       <a class="<%=mixer.phantom ? "active" : ""%> master-btn mybtn" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>
     </td>
     <td rowspan="5"><%str="mixer[main_mix_value]"%><%=hidden_field_tag str%>volume
-      <input class="volume" value="50" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" name="mixer[main_mix_value]" type="hidden" />
+      <input class="volume" value="<%=mixer.main_mix_value || 80%>" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" name="mixer[main_mix_value]" type="hidden" />
 
     <ul>
       <li></li>
@@ -136,7 +136,8 @@
       <li></li>
       <li></li>   
     </ul> 
-    <input class="slider master" value="50" type="range" />
+        <%=range_field_tag "mixer[main_mix_value]",mixer.main_mix_value,  class:"slider master" %>
+
     </td>
     </tr>
   <tr>
@@ -845,6 +846,7 @@ $('.mycss'+String($(this)[0].id).replace(' ','')).remove();
 $('head').append('<style rel="stylesheet" class="mycss'+String($(this)[0].id).replace(' ','')+'">#'+String($(this)[0].id).replace(' ','')+'::after{transform:rotate('+String(res)+'deg);}</style>');
 });
 <%end%>
+});
 });
 </script>
 <%end%>

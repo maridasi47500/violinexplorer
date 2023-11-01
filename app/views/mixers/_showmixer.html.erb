@@ -103,7 +103,6 @@
       <a class="<%=mixer.phantom ? "active" : ""%> master-btn mybtn" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></a>
     </td>
     <td rowspan="5"><%str="mixer[main_mix_value]"%>volume
-      <input class="volume" value="50" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" data-name="<%=str%>" type="hidden" />
 
     <ul>
       <li></li>
@@ -121,7 +120,7 @@
       <li></li>
       <li></li>   
     </ul> 
-    <%=range_field_tag "level",mixer.main_mix_value,  class:"slider master" %>
+    <%=range_field_tag "mixer[main_mix_value]",mixer.main_mix_value,  class:"slider master", readonly:"",disabled:"",onchange: "return false;", oninput: "return false;" %>
     </td>
     </tr>
   <tr>
