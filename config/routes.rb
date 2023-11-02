@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :mics
-  resources :mixers
   resources :comments
   resources :ytlinks
   resources :mymessages
