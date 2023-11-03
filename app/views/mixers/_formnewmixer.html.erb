@@ -17,7 +17,7 @@
   <div class="actions">
   <%=form.submit "créer le mixer"%>
   </div>
-<table class="partiehautdemonmixer">
+<table class="mixage partiehautdemonmixer">
   <tr>
     <%@mixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][mic]"%>
@@ -28,7 +28,7 @@
   <%end%>
     <td colspan="4">XENYX</td>
     <td colspan="2" rowspan="4">
-      <table>
+      <table class="mixage">
         <tr><td colspan="2">ctrl room out</td></tr>
   <tr>
     <td><%str="mixer[ctrl_room_out_l]"%><%=hidden_field_tag str%><a data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>" class="linein <%=mixer.ctrl_room_out_l ? "active" : ""%>"></a>l</td>
@@ -96,7 +96,7 @@
 
 </table>
 <p>table partie bas</p>
-<table class="basdemonmixer">
+<table class="mixage basdemonmixer">
   <tr>
     <%@mixers.each do |x|%>
       <%str="mixer[mics_attributes][#{@mix[x]}][eq_high]"%>
@@ -110,7 +110,7 @@
       <td><%=hidden_field_tag str%><div class="fx myfx" data-name="<%=str%>" id="<%="find_"+str.parameterize.underscore%>"></div>fx <%=x%></td>
   <%end%>
     <td rowspan="6" colspan="2">
-<table>
+<table class="mixage">
   <tr>
     
     <td>phantom
@@ -146,7 +146,7 @@
     </tr>
   <tr>
     
-    <td class="mainsection"><table>
+    <td class="mainsection"><table class="mixage">
         <tr>
           <td>
             <%str="mixer[_2tr_to_ctrl_room]"%><%=hidden_field_tag str%>
