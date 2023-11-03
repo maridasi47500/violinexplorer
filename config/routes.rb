@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :myfiles
   resources :playlists
   resources :recordings
+  resources :mixers
   resources :pieces
   #devise_for :users
   resources :songs do

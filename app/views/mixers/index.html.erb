@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<h1>Songs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mixers.each do |mixer| %>
+      <tr>
+        <td><%= link_to 'Show mixer', mixer %></td>
+        <td><%= link_to 'Edit', edit_mixer_path(mixer) %></td>
+        <td><%= link_to 'Destroy', mixer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Song', new_mixer_path %>

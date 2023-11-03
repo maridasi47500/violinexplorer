@@ -36,6 +36,7 @@ class MicsTest < ApplicationSystemTestCase
     visit mics_url
     click_on "Edit", match: :first
 
+<<<<<<< HEAD
     fill_in "Ban", with: @mic.ban
     fill_in "Eq high", with: @mic.eq_high
     fill_in "Eq low", with: @mic.eq_low
@@ -48,6 +49,8 @@ class MicsTest < ApplicationSystemTestCase
     check "Mic" if @mic.mic
     fill_in "Mixer", with: @mic.mixer_id
     fill_in "Type", with: @mic.type
+=======
+>>>>>>> 17210051b3144d047c39d3e9b09d6c964351958d
     click_on "Update Mic"
 
     assert_text "Mic was successfully updated"

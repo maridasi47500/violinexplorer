@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_23_014106) do
+ActiveRecord::Schema.define(version: 2023_10_30_015658) do
 
   create_table "accompaniments", force: :cascade do |t|
     t.integer "song_id"
@@ -31,23 +31,26 @@ ActiveRecord::Schema.define(version: 2023_09_23_014106) do
   create_table "mics", force: :cascade do |t|
     t.boolean "mic"
     t.boolean "line_in"
+    t.boolean "l_line_in"
+    t.boolean "r_line_in"
     t.float "gain"
     t.float "eq_high"
     t.float "eq_mid"
     t.float "eq_low"
     t.boolean "low_cut"
     t.float "fx"
-    t.float "ban"
+    t.float "pan"
+    t.float "bal"
     t.float "level"
     t.integer "mixer_id"
+    t.integer "nb"
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "nb"
   end
 
   create_table "mixers", force: :cascade do |t|
-    t.boolean "ctrf_room_out_l"
+    t.boolean "ctrl_room_out_l"
     t.boolean "ctrl_room_out_r"
     t.boolean "_2tr_out_r"
     t.boolean "_2tr_out_l"
@@ -67,6 +70,8 @@ ActiveRecord::Schema.define(version: 2023_09_23_014106) do
     t.integer "song_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
+    t.string "name"
   end
 
   create_table "myfiles", force: :cascade do |t|
