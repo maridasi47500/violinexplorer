@@ -1,6 +1,9 @@
 <span onclick="document.getElementById('overlay').style.display = 'none';">X</span>
 <%=form_with model: @vote do  |f|%>
 <%end%>
+<a href="javascript:void(0)" data-myurl="/uploads/<%=@recording.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
+<a href="javascript:void(0)" data-myurl="<%=@recording.filename%>" onclick="window.audio.pause();">arrete</a>
+
 <p>
 <%(1..5).each do |h|%>
 <span onclick="$.ajax({type:'post',url:'/votes',data:{vote:{myfile_id:<%=@recording.id%>, note: <%=h%>}}});document.getElementById('overlay').style.display = 'none';">&#11088</span>

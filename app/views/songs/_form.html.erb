@@ -20,6 +20,21 @@
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
+  <div class="field">
+        <%=form.file_field :myfile3%>
+    <%=form.submit "ajouter la partie"%>
+
+  </div>
+  <div class="field">
+        <%=form.file_field :myfile2%>
+    <%=form.submit "ajouter l'accompagnement"%>
+
+  </div>
+  <div class="field">
+    <%=form.file_field :myfile%>
+    <%=form.submit "ajouter le morceau"%>
+  </div>
+
   <%=form.fields_for :ytlinks do |f|%>
   <div class="field">
     <%= f.label :link %>

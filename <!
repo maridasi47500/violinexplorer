@@ -60,12 +60,6 @@
 
 <div class="accompaniment">
   <h4>accompagnement</h4>
-<%@song.accompaniments.each do |acc|%>
-
-    <a href="javascript:void(0)" data-myurl="/uploads/<%=acc.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
-
-<%end%>
-  <h4>accompagnement</h4>
 <%if Dir.glob(Rails.root.to_s+"/public/uploads/**.mp3").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize+".mp3")}%>
 
 
@@ -78,19 +72,16 @@
   <h4>accompagnement</h4>
 <%@song.accompaniments.each do |acc|%>
 
-    <a href="javascript:void(0)" data-myurl="/uploads/<%=acc.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
+    <a href="javascript:void(0)" data-myurl="<%=acc.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
 
 <%end%>
   <%=form_with model: @song do |form|%>
   <%end%>
   <h4>partie</h4>
 <%if Dir.glob(Rails.root.to_s+"/public/uploads/**partie**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
-    <a href="javascript:void(0)" data-myurl="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>partie.mp3" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
-    <a href="javascript:void(0)" data-myurl="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>partie.mp4" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
 
 
-
-
+    <a href="javascript:void(0)" data-myurl="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
 
 <%end%>
   <%=form_with model: @song do |form|%>
