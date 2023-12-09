@@ -18,13 +18,10 @@ const outputContainer = document.getElementById('volume-output');
 	const playIconContainer = document.getElementById('play-icon');
 	const seekSlider = document.getElementById('seek-slider');
 const currentTimeContainer = document.getElementById('current-time');
-	var playState="";
+	var playState="pause";
 
 
 
-window.audio.addEventListener('loadedmetadata', () => {
-  displayDuration(window.audio.duration);
-});
 
 	const calculateTime = (secs) => {
   const minutes = Math.floor(secs / 60);
@@ -38,9 +35,37 @@ const displayDuration = () => {
 
 if (window.audio.readyState > 0) {
   displayDuration();
+  setSliderMax();
 } else {
+  window.audio.addEventListener('ended', () => {
+
+	  if (window.audio && !window.audio.paused){
+            window.audio.pause();
+	  }
+  window.audio.currentTime=0;
+  seekSlider.value = Math.floor(window.audio.currentTime);
+
+    playState = 'pause';
+    playIconContainer.innerHTML =(playIconContainer.dataset.play);
+
+  });
   window.audio.addEventListener('loadedmetadata', () => {
     displayDuration();
+  setSliderMax();
+  if(playState === 'pause') {
+    window.audio.play();
+    playState = 'play';
+
+    playIconContainer.innerHTML=(playIconContainer.dataset.pause);
+  } else {
+	  if (window.audio && !window.audio.paused){
+            window.audio.pause();
+	  }
+
+    playState = 'pause';
+    playIconContainer.innerHTML =(playIconContainer.dataset.play);
+
+  }
   });
 }
 
@@ -49,29 +74,23 @@ const setSliderMax = () => {
   seekSlider.max = Math.floor(window.audio.duration);
 }
 
-if (window.audio.readyState > 0) {
-  displayDuration();
-  setSliderMax();
-} else {
-  window.audio.addEventListener('loadedmetadata', () => {
-    displayDuration();
-    setSliderMax();
-  });
-}
 
 
 
 
 
 playIconContainer.addEventListener('click', () => {
-  if(playState === 'play') {
+  if(playState === 'pause') {
     window.audio.play();
-    playState = 'pause';
+    playState = 'play';
 
     playIconContainer.innerHTML=(playIconContainer.dataset.pause);
   } else {
-    window.audio.pause();
-    playState = 'play';
+	  if (window.audio && !window.audio.paused){
+            window.audio.pause();
+	  }
+
+    playState = 'pause';
     playIconContainer.innerHTML =(playIconContainer.dataset.play);
 
   }

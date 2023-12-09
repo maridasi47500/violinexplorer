@@ -19,11 +19,18 @@
 <%=link_to "pieces",pieces_path%> | 
 <%=link_to "my messages for radio",mymessages_path%> |
 <%=link_to "my mixer",mixers_path%> |
+<%=link_to "my recordings",recordings_path%> |
 <%=link_to "playlists",playlists_path%>
 <%=link_to "allsongs","/songs/allsong"%>
+
 <%=link_to "mixers",mixers_path%>
-<a href="javascript:void(0)" onclick="$('#seek-slider').addClass('fiddle')">violin électrique</a>
-<a href="javascript:void(0)" onclick="$('#seek-slider').removeClass('fiddle')">violin acoustique</a>
+<a href="javascript:void(0)" onclick="$('#seek-slider')[0].className='slider piano';">piano</a>
+<a href="javascript:void(0)" onclick="$('#seek-slider')[0].className='slider trompette';">trompette</a>
+<a href="javascript:void(0)" onclick="$('#seek-slider')[0].className='slider flutetraversiere';">flute traversiere</a>
+<a href="javascript:void(0)" onclick="$('#seek-slider')[0].className='slider saxophone';">saxophone</a>
+<a href="javascript:void(0)" onclick="$('#seek-slider')[0].className='slider fiddle';">violin électrique</a>
+
+<a href="javascript:void(0)" onclick="$('#seek-slider')[0].className='slider';">violin acoustique</a>
 
 
 </nav>

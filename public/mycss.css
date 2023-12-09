@@ -126,7 +126,6 @@ border-radius:777777px;
     margin: 7px; /* alignment fix for Chrome */
 
 }
-
 .slider.fiddle::-moz-range-thumb {
   width: 43px;
 
@@ -141,4 +140,141 @@ border-radius:777777px;
   background-repeat: no-repeat;
   cursor: pointer;
 }
+
+
+.slider.saxophone::-moz-range-thumb {
+  width: 43px;
+
+  height: 45px;
+  border: 0;
+  background: url('/assets/saxophone.png');
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-position: center;
+  vertical-align:middle;
+border-radius:777777px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.slider.saxophone::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 43px;
+  height: 44px;
+  border: 0;
+  background: url('/assets/saxophone.png');
+  background-size: 100% 100%;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+border-radius:777777px;
+  vertical-align:middle;
+  cursor: pointer;
+    margin: 7px; /* alignment fix for Chrome */
+
+}
+.slider.flutetraversiere::-moz-range-thumb {
+  width: 43px;
+
+  height: 45px;
+  border: 0;
+  background: url('/assets/flutetraversiere.png');
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-position: center;
+  vertical-align:middle;
+border-radius:777777px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.slider.flutetraversiere::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 43px;
+  height: 44px;
+  border: 0;
+  background: url('/assets/flutetraversiere.png');
+  background-size: 100% 100%;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+border-radius:777777px;
+  vertical-align:middle;
+  cursor: pointer;
+    margin: 7px; /* alignment fix for Chrome */
+
+}
+
+
+.slider.piano::-moz-range-thumb {
+  width: 43px;
+
+  height: 45px;
+  border: 0;
+  background: url('/assets/piano.png');
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-position: center;
+  vertical-align:middle;
+border-radius:777777px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.slider.piano::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 43px;
+  height: 44px;
+  border: 0;
+  background: url('/assets/piano.png');
+  background-size: 100% 100%;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+border-radius:777777px;
+  vertical-align:middle;
+  cursor: pointer;
+    margin: 7px; /* alignment fix for Chrome */
+
+}
+
+
+
+.slider.trompette::-moz-range-thumb {
+  width: 43px;
+
+  height: 45px;
+  border: 0;
+  background: url('/assets/trompette.png');
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-position: center;
+  vertical-align:middle;
+border-radius:777777px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.slider.trompette::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 43px;
+  height: 44px;
+  border: 0;
+  background: url('/assets/trompette.png');
+  background-size: 100% 100%;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+border-radius:777777px;
+  vertical-align:middle;
+  cursor: pointer;
+    margin: 7px; /* alignment fix for Chrome */
+
+}
+
+
 

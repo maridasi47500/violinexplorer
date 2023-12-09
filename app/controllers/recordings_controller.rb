@@ -3,7 +3,8 @@ class RecordingsController < ApplicationController
 
   # GET /recordings or /recordings.json
   def index
-    @recordings = Recording.all.page(params[:page])
+    @r=Recording
+    @recordings = Recording.mypage(params[:page])
     if params[:page].to_i <= 1
       params[:page]=nil
     end
@@ -56,7 +57,7 @@ class RecordingsController < ApplicationController
     @recording.destroy
 
     respond_to do |format|
-      format.html { redirect_to recordings_url, notice: "Recording was successfully destroyed." }
+      format.html { redirect_to recordings_url(page: params[:page]), notice: "Recording was successfully destroyed." }
       format.json { head :no_content }
     end
   end

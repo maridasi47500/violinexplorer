@@ -14,23 +14,24 @@
   <tbody>
     <% @recordings.each do |recording| %>
       <tr>
-        <td><audio  preload="none" class="mysong" controls>
-  <source  src="/uploads/<%= recording.filename %>" type="audio/wav">
-  Your browser does not support the audio tag.
-</audio></td>
-        <td><%= recording.song.displayname %></td>
+        <td><%= recording.artist %> - <%= recording.title %></td>
+        <td><a onclick="window.audio.src='/uploads/<%=recording.filename%>';window.audio.load();" href="javascript:void(0)">écouter</a></td>
         <td><%= link_to 'Show', recording %></td>
         <td><%= link_to 'Edit', edit_recording_path(recording) %></td>
+        <td><%= button_to 'Supprimer', recording_path(recording, page: params[:page]),{method: :delete} %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%if @recordings.precedent(params[:page])%>
-<%=link_to "<", recordings_path(page: @recordings.precedent(params[:page]))%>
+<%@p= @r.precedent(params[:page])%>
+<%@s= @r.suivant(params[:page])%>
+<p>Hey!!</p>
+<%if @p%>
+<%=link_to "<", recordings_path(page: @p)%>
 <%end%>
-<%if @recordings.suivant(params[:page])%>
-<%=link_to ">", recordings_path(page: @recordings.suivant(params[:page]))%>
+<%if @s%>
+<%=link_to ">", recordings_path(page: @s)%>
 <%end%>
 
 <br>
