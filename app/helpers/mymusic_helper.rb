@@ -1,0 +1,2 @@
+module MymusicHelper
+end

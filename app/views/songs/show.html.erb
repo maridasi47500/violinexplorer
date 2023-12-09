@@ -45,7 +45,7 @@
 
 
       </section>
-<%=link_to "all the recordings", recordings_song_path(@song.id)%>
+
       <section class="sound-clips">
         <%#@a=1%>
         <%#@xx=Dir.glob(Rails.root.to_s+"/public/uploads/**recording**")%>
@@ -58,45 +58,36 @@
     </div>
 
 
-<div class="accompaniment">
-  <h4>accompagnement</h4>
-<%@song.accompaniments.each do |acc|%>
-
-    <a href="javascript:void(0)" data-myurl="/uploads/<%=acc.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
-
-<%end%>
-  <h4>accompagnement</h4>
-<%if Dir.glob(Rails.root.to_s+"/public/uploads/**.mp3").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize+".mp3")}%>
-
-
-  <a href="javascript:void(0)" data-myurl="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
-
-<%end%>
+<div class="heyaccompaniment">
   <label for="recordpart"> enregistrer la partie seule (avec  l'accompagnement)
       <input id="recordpart" type="checkbox" name="recordpart" value="1" /></label>
+</div>
 
   <h4>accompagnement</h4>
+  <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        <%paspremier=false%>
 <%@song.accompaniments.each do |acc|%>
+  <div class="carousel-item <%= !paspremier ? "active" : ""%>">
 
-    <a href="javascript:void(0)" data-myurl="/uploads/<%=acc.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
 
+    <a href="javascript:void(0)" data-myurl="/uploads/<%=acc.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;window.audio.play();">ecouter</a>
+      </div>
+
+        <%paspremier=true%>
 <%end%>
-  <%=form_with model: @song do |form|%>
-  <%end%>
-  <h4>partie</h4>
-<%if Dir.glob(Rails.root.to_s+"/public/uploads/**partie**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
-    <a href="javascript:void(0)" data-myurl="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>partie.mp3" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
-    <a href="javascript:void(0)" data-myurl="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>partie.mp4" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;">ecouter</a>
-
-
-
-
-
-<%end%>
-  <%=form_with model: @song do |form|%>
-  <%end%>
-
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
+
+
 
 <div id="overlay">
   <div id="text">Overlay Text</div>
@@ -112,6 +103,8 @@
 <%= link_to 'Filmer', vids_song_path(@song) %> |
 <%= link_to 'Edit', edit_song_path(@song) %> |
 <%= link_to 'add yt link', addytlink_song_path(@song) %> |
+<%= link_to 'voir les enregistreemetns deja fait', showmysong_song_path(@song) %> |
+<%=link_to "all the recordings (mauvais lien)", recordings_song_path(@song.id)%> |
 <%= link_to 'Back', songs_path %>
 <%=content_for :js do%>
 <script src="/js/audiodisplay.js"></script>

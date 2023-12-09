@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<div hidden id="myartist"><%=@song.artist%></div>
+<div hidden id="myname"><%=@song.title%></div>
+<div hidden id="mypath">/uploads/<%=@song.file%>.mp3</div>
+<div hidden id="lyrichash"><%=raw (@song.lyrichash)%></div>
+<div hidden id="track_list"><%=raw (@song.track_list)%></div>
+<div hidden id="curr_time_m"></div>
+<div hidden id="mycurrtrack"></div>
+<div class="player">
+ 
+    <!-- Define the section for displaying details -->
+    <div class="details">
+      <div class="now-playing">PLAYING x OF y</div>
+      <div class="track-art"></div>
+      <div class="track-name">Track Name</div>
+      <div class="track-artist">Track Artist</div>
+    </div>
+<p id="displaylyric"></p>
+ 
+    <!-- Define the section for displaying track buttons -->
+    <div class="buttons">
+      <div class="prev-track" onclick="prevTrack()">
+        &#x25C0;&#x25C0;
+      </div>
+      <div class="playpause-track" onclick="playpauseTrack()">
+        &#x25B6;
+      </div>
+      <div class="next-track" onclick="nextTrack()">
+        &#x25B6;
+        &#x25B6;
+      </div>
+    </div>
+ 
+    <!-- Define the section for displaying the seek slider-->
+    <div class="slider_container">
+      <div class="current-time">00:00</div>
+      <input type="range" min="1" max="100"
+        value="0" class="seek_slider" onchange="seekTo()">
+      <div class="total-duration">00:00</div>
+    </div>
+ 
+    <!-- Define the section for displaying the volume slider-->
+    <div class="slider_container">
+       &#x1F509;
+      <input type="range" min="1" max="100"
+        value="99" class="volume_slider" onchange="setVolume()">
+      &#x1F50A;
+    </div>
+  </div>
+<%if @song.lyrics.length > 0%>
+<ul class="lyrics">
+<%@song.lyrics.each do |h|%>
+<li><%=h.content%></li>
+<%end%>
+</ul>
+<%else%>
+<p class="lyrics">les parole pas ajoutée</p>
+<%end%>
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Back', songs_path %>

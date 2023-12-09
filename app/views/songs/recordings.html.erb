@@ -4,29 +4,16 @@
     <%begin%>
     <%if x.partonly %>
     <div class="mysound">
-        <button onclick="myaccomp<%=x.id%>.play();mypart<%=x.id%>.play();">
-      play
-    </button>
-    
-    <button  onclick="myaccomp<%=x.id%>.pause();mypart<%=x.id%>.pause();">pause</button>
-    accompaniemnt
-     <audio id="myaccomp<%=x.id%>" controls  preload="none">
-  <source  src="/uploads/<%=x.accompaniment.filename%>" type="audio/wav">
-  Your browser does not support the audio tag.
-</audio>
     part
-     <audio id="mypart<%=x.id%>" controls  preload="none">
-  <source  src="/uploads/<%=x.filename%>" type="audio/wav">
-  Your browser does not support the audio tag.
-</audio>
+<p class="mycontent"><%=x.mycontent%></p>
+<a href="javascript:void(0)" data-myurl="/uploads/<%=x.accompaniment.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;window.audio.play();">ecouter</a>
+<p class="mycontent">accomp</p>
+<a href="javascript:void(0)" data-myurl="/uploads/<%=x.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;window.audio.play();">ecouter</a>
     </div>
     <%else%>
 <div class="mysound">
 <p class="mycontent"><%=x.mycontent%></p>
-   <audio class="mysong<%=x.id%>" controls  preload="none">
-  <source  src="/uploads/<%=x.filename%>" type="audio/wav">
-  Your browser does not support the audio tag.
-</audio>
+<a href="javascript:void(0)" data-myurl="/uploads/<%=x.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;window.audio.play();">ecouter</a>
 </div>
     <%end%>
      <%rescue => e%>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'songs/allsong'
+  get 'mymusic/hello'
   resources :mics
   resources :comments
   resources :ytlinks
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
   #devise_for :users
   resources :songs do
     member do
+      get "showmysong"
       get "recordings"
       get "addytlink"
       get "vids"

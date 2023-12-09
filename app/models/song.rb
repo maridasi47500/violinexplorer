@@ -43,7 +43,7 @@ end
     title + " - " + artist
   end
   def myfile=(uploaded_io)
-    myfilename=self.title.parameterize+self.artist.parameterize+"."+uploaded_io.original_filename.split(".")[-1]
+    myfilename=self.title.parameterize+self.artist.parameterize+"."+uploaded_io.original_filename
     self.accompaniments.push(Accompaniment.new(song: self, filename: myfilename))
 
     File.open(Rails.root.join('public', 'uploads', myfilename), 'wb') do |file|
@@ -51,14 +51,15 @@ end
     end
   end
   def myfile2=(uploaded_io)
-    myfilename=self.title.parameterize+self.artist.parameterize+"accompaniment."+uploaded_io.original_filename.split(".")[-1]
+    myfilename=self.title.parameterize+self.artist.parameterize+"accompaniment."+uploaded_io.original_filename
     self.accompaniments.push(Accompaniment.new(song: self, filename: myfilename))
     File.open(Rails.root.join('public', 'uploads', myfilename), 'wb') do |file|
       file.write(uploaded_io.read)
     end
   end
   def myfile3=(uploaded_io)
-    myfilename=self.title.parameterize+self.artist.parameterize+"partie."+uploaded_io.original_filename.split(".")[-1]
+    myfilename=self.title.parameterize+self.artist.parameterize+"partie."+uploaded_io.original_filename
+    self.accompaniments.push(Accompaniment.new(song: self, filename: myfilename))
     File.open(Rails.root.join('public', 'uploads', myfilename), 'wb') do |file|
       file.write(uploaded_io.read)
     end
@@ -75,4 +76,41 @@ end
   def myfilename
     self.title.parameterize+self.artist.parameterize
   end
+  def azr
+end
+  def file
+    recordings.last.try(:filename) || ""
+  end
+  def lyrics
+    []
+  end
+def lyrichash
+{}.to_h.to_json
+end
+def self.lyrichash
+  {}.to_h.to_json
+end
+def track_list
+  x=self.recordings.shuffle.map do |x|
+  {
+    name: self.title,
+    artist: self.artist,
+    image: (nil or "https://source.unsplash.com/Qrspubmx6kE/640x360"),
+    path: "/uploads/"+x.filename
+  }
+  end
+x.to_json
+end
+def self.track_list
+  xx=Recording.all.shuffle.map do |x|
+  {
+    name: x.song.title,
+    artist: x.song.artist,
+    image: (nil or "https://source.unsplash.com/Qrspubmx6kE/640x360"),
+    path: "/uploads/"+x.filename
+  }
+end
+xx.to_json
+end
+
 end

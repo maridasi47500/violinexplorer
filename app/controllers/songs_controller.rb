@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: %i[ show edit update destroy myurl recordings vids addytlink]
+  before_action :set_song, only: %i[ show edit update destroy myurl recordings vids addytlink showmysong]
   def addytlink
     @song.ytlinks.new
   end

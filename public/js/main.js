@@ -18,7 +18,7 @@ const outputContainer = document.getElementById('volume-output');
 	const playIconContainer = document.getElementById('play-icon');
 	const seekSlider = document.getElementById('seek-slider');
 const currentTimeContainer = document.getElementById('current-time');
-	var playState="pause";
+	var playState="";
 
 
 
