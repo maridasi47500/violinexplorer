@@ -1,5 +1,6 @@
 class Song < ApplicationRecord
 has_many :recordings
+has_many :talkings
 has_many :accompaniments
 has_many :videos
 has_many :ytlinks

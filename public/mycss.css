@@ -278,3 +278,38 @@ border-radius:777777px;
 
 
 
+.slider.micro::-moz-range-thumb {
+  width: 43px;
+
+  height: 45px;
+  border: 0;
+  background: url('/assets/micro.png');
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-position: center;
+  vertical-align:middle;
+border-radius:777777px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.slider.micro::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 43px;
+  height: 44px;
+  border: 0;
+  background: url('/assets/micro.png');
+  background-size: 100% 100%;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+border-radius:777777px;
+  vertical-align:middle;
+  cursor: pointer;
+    margin: 7px; /* alignment fix for Chrome */
+
+}
+
+
+

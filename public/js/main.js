@@ -152,6 +152,10 @@ function on() {
 function off() {
   document.getElementById("overlay").style.display = "none";
 } 
+var mymic=$("#mymic")[0];
+if (!mymic){
+	return;
+}
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var audioContext = new AudioContext();
@@ -160,6 +164,7 @@ var audioInput = null,
     realAudioInput = null,
     inputPoint = null,
     audioRecorder = null;
+
 var rafID = null;
 var analyserContext = null;
 var canvasWidth, canvasHeight;
@@ -201,6 +206,11 @@ function doneEncoding( blob ) {
     formData.append("recording",recording);
     formData.append("accompaniment_id",$("[name=myaccomp]:checked").val());
     formData.append("partonly",($("[name=recordpart]")[0].checked ? "1" : "0"));
+	if ($(".slider").hasClass("micro")){
+    formData.append("micro",("1"));
+	}else{
+    formData.append("micro",("0"));
+	}
    
     $.ajax({type:"POST",url:"/audio/save/"+$("#myid").html(),
     processData: false,
@@ -228,6 +238,8 @@ function toggleRecording( e ) {
     } else {
         // start recording
         if (!audioRecorder)
+            return;
+        if (!mymic)
             return;
         e.classList.add("recording");
         audioRecorder.clear();

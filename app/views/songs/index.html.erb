@@ -16,10 +16,7 @@
   <tbody>
     <% @recordings.each do |recording| %>
       <tr>
-        <td> <audio  preload="none" id="mysong" controls>
-  <source  src="/uploads/<%= recording.filename %>" type="audio/wav">
-  Your browser does not support the audio tag.
-</audio></td>
+        <td><a href="javascript:void(0)" onclick="window.audio.src='/uploads/<%=recording.filename%>';window.audio.load();">ecouter</a> </td>
 <td>
 <a id="save" href="/uploads/<%= recording.filename %>" download="<%=recording.filename%>.wav"><img src="/img/save.svg"></a>
 </td>
@@ -73,3 +70,9 @@
 <br>
 
 <%= link_to 'New Song', new_song_path %>
+<%=content_for :js do%>
+<script src="/js/audiodisplay.js"></script>
+        <script src="/js/recorderjs/recorder.js"></script>
+        <script src="/js/main.js"></script>
+<%end%>
+
