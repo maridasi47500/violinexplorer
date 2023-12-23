@@ -92,7 +92,7 @@ def self.lyrichash
   {}.to_h.to_json
 end
 def track_list
-  x=self.recordings.shuffle.map do |x|
+  x=self.recordings.map do |x|
   {
     name: self.title,
     artist: self.artist,
@@ -103,7 +103,7 @@ def track_list
 x.to_json
 end
 def self.track_list
-  xx=Recording.all.shuffle.map do |x|
+  xx=Recording.all.map do |x|
   {
     name: x.song.title,
     artist: x.song.artist,

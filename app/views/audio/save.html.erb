@@ -1,8 +1,7 @@
 <span onclick="document.getElementById('overlay').style.display = 'none';">X</span>
 <%=form_with model: @vote do  |f|%>
 <%end%>
-<a href="javascript:void(0)" data-myurl="/uploads/<%=@recording.filename%>" onclick="window.audio.pause();window.audio.src=this.dataset.myurl;window.audio.load();">ecouter</a>
-<a href="javascript:void(0)" data-myurl="<%=@recording.filename%>" onclick="window.audio.pause();">arrete</a>
+<a href="javascript:void(0)" data-myurl="/uploads/<%=@recording.filename%>" onclick="playState='pause';(window.audio && !window.audio.paused ? window.audio.pause() : console.log('audio not playing'));window.audio.src=this.dataset.myurl;window.audio.load();">ecouter</a>
 
 <p>
 <%(1..5).each do |h|%>

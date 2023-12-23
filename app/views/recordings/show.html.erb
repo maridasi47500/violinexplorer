@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<a href="/uploads/<%= @recording.filename %>">hey</a>
 <p>
  <audio  preload="none" id="mysong" controls>
   <source  src="/uploads/<%= @recording.filename %>" type="audio/wav">

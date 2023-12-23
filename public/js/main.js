@@ -13,6 +13,7 @@
 */
 	window.audio = new Audio();
 const volumeSlider = document.getElementById('volume-slider');
+
 const outputContainer = document.getElementById('volume-output');
 	const durationContainer = document.getElementById('duration');
 	const playIconContainer = document.getElementById('play-icon');
@@ -39,20 +40,26 @@ if (window.audio.readyState > 0) {
 } else {
   window.audio.addEventListener('ended', () => {
 
-	  if (window.audio && !window.audio.paused){
-            window.audio.pause();
-	  }
-  window.audio.currentTime=0;
-  seekSlider.value = Math.floor(window.audio.currentTime);
-
-    playState = 'pause';
-    playIconContainer.innerHTML =(playIconContainer.dataset.play);
+//	  if (window.audio && !window.audio.paused){
+//            window.audio.pause();
+//	  }
+//  window.audio.currentTime=0;
+//  seekSlider.value = Math.floor(window.audio.currentTime);
+//
+//    playState = 'pause';
+//    playIconContainer.innerHTML =(playIconContainer.dataset.play);
 
   });
   window.audio.addEventListener('loadedmetadata', () => {
+
+  if(playState === 'pause') {
+	  if (window.audio && !window.audio.paused){
+            window.audio.pause();
+	  }
+	  //window.audio.currentTime=0;
+  seekSlider.value = 0;
     displayDuration();
   setSliderMax();
-  if(playState === 'pause') {
     window.audio.play();
     playState = 'play';
 
@@ -61,6 +68,8 @@ if (window.audio.readyState > 0) {
 	  if (window.audio && !window.audio.paused){
             window.audio.pause();
 	  }
+    displayDuration();
+  setSliderMax();
 
     playState = 'pause';
     playIconContainer.innerHTML =(playIconContainer.dataset.play);
@@ -152,10 +161,9 @@ function on() {
 function off() {
   document.getElementById("overlay").style.display = "none";
 } 
-var mymic=$("#mymic")[0];
-if (!mymic){
-	return;
-}
+
+const mymic=document.getElementById("record");
+if (mymic){
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var audioContext = new AudioContext();
@@ -442,4 +450,6 @@ function initAudio() {
         
 }
 
+
 window.addEventListener('load', initAudio );
+}

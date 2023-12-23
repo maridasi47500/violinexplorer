@@ -54,6 +54,7 @@ class RecordingsController < ApplicationController
 
   # DELETE /recordings/1 or /recordings/1.json
   def destroy
+    puts File.delete("./uploads/"+@recording.filename)
     @recording.destroy
 
     respond_to do |format|
