@@ -20,7 +20,7 @@ sh mesairpods.sh
 * dans le terminal fais 
 ```
  hdajackretask 
-```
+
 
 et faire apply now
 (si tu n'as pas l'application apres apt install fais "restart")
