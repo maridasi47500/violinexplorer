@@ -30,9 +30,9 @@ This `README.md` outlines the audio mixer settings and best practices for optimi
 ---
 
 ## Best Practices
-1. **Set Gain**: Start with the gain at a low level and adjust gradually to avoid clipping (check CLIP indicator).
+1. **Set Gain**: Start with the gain at a low level and adjust gradually to avoid clipping (check CLIP indicator). (gain à gauche pour l'instrument electrique, à droite pour le micro)
 2. **Use Flat EQ**: Begin with all EQ bands at 0 dB and adjust based on the instrument's sound.
-3. **Balance Levels**: Ensure each channel's level is balanced for a cohesive mix.
+3. **Balance Levels**: Ensure each channel's level is balanced for a cohesive mix. (au moins 1 instrument de musique)
 4. **Monitor in Control Room**: Adjust monitoring volume independently from the audience’s main mix.
 5. **Test Main Mix**: Ensure levels remain mostly in the green and only occasionally in the orange. (vert et orange sur la table de mixage)
 
