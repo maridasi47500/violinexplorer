@@ -8,7 +8,7 @@ This `README.md` outlines the audio mixer settings and best practices for optimi
 ## Parameters
 ### Gain
 - **+40/+60 dB**: For preamp signals (e.g., microphones, passive pickups).
-- **+10/-10 dB**: Fine adjustments for balancing input levels.
+- **+10/-10 dB**: Fine adjustments for balancing input levels (instrument de musique electrique)
 
 ### Equalizer (EQ)
 - **High (12 kHz, -15/+15 dB)**: Adjusts treble. Boost for brightness and clarity; cut to reduce shrillness.
@@ -34,7 +34,7 @@ This `README.md` outlines the audio mixer settings and best practices for optimi
 2. **Use Flat EQ**: Begin with all EQ bands at 0 dB and adjust based on the instrument's sound.
 3. **Balance Levels**: Ensure each channel's level is balanced for a cohesive mix.
 4. **Monitor in Control Room**: Adjust monitoring volume independently from the audience’s main mix.
-5. **Test Main Mix**: Ensure levels remain mostly in the green and only occasionally in the orange.
+5. **Test Main Mix**: Ensure levels remain mostly in the green and only occasionally in the orange. (vert et orange sur la table de mixage)
 
 ---
 
