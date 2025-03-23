@@ -10,7 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_15_164526) do
+ActiveRecord::Schema.define(version: 2023_10_30_015658) do
+
+  create_table "mics", force: :cascade do |t|
+    t.boolean "mic"
+    t.boolean "line_in"
+    t.boolean "l_line_in"
+    t.boolean "r_line_in"
+    t.float "gain"
+    t.float "eq_high"
+    t.float "eq_mid"
+    t.float "eq_low"
+    t.boolean "low_cut"
+    t.float "fx"
+    t.float "pan"
+    t.float "bal"
+    t.float "level"
+    t.integer "mixer_id"
+    t.integer "nb"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "mixers", force: :cascade do |t|
+    t.boolean "ctrl_room_out_l"
+    t.boolean "ctrl_room_out_r"
+    t.boolean "_2tr_out_r"
+    t.boolean "_2tr_out_l"
+    t.boolean "_2tr_in_r"
+    t.boolean "_2tr_in_l"
+    t.boolean "main_out_l"
+    t.boolean "main_out_r"
+    t.boolean "phones"
+    t.boolean "fx_send"
+    t.boolean "phantom"
+    t.float "fx_send_value"
+    t.boolean "_2tr_to_ctrl_room"
+    t.boolean "_2tr_to_mix"
+    t.boolean "fx_to_ctrl_room"
+    t.float "phones_value"
+    t.float "main_mix_value"
+    t.integer "song_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+
+  end
 
   create_table "accompaniments", force: :cascade do |t|
     t.integer "song_id"
@@ -26,11 +71,8 @@ ActiveRecord::Schema.define(version: 2023_08_15_164526) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "type"
     t.text "mycontent"
-<<<<<<< HEAD
-=======
     t.integer "accompaniment_id"
     t.boolean "partonly"
->>>>>>> origin/myaccompaniment
   end
 
   create_table "pieces", force: :cascade do |t|

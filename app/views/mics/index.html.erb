@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mics.each do |mic| %>
+      <tr>
+        <td><%= link_to 'Show', mic %></td>
+        <td><%= link_to 'Edit', edit_mic_path(mic) %></td>
+        <td><%= link_to 'Destroy', mic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mic', new_mic_path %>
