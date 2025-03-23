@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :mics
   resources :mixers
+  resources :mymessages
+  resources :votes
   post 'video/save/:id', to: 'video#save'
   post 'audio/save/:id', to: "audio#save"
   resources :myfiles

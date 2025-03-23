@@ -11,14 +11,17 @@
 
   <body>
 <nav style="width:100%;height:50px;background:blue;color:yellow;">
-    <a href="/auth/login">connexion/inscription</a>
-    <a href="/">bienvenue</a>
-<%=link_to "pieces",pieces_path%>
+    <a href="/auth/login">connexion/inscription</a> |
+    <a href="/">bienvenue</a> |
+<%=link_to "pieces",pieces_path%> | 
+<%=link_to "my messages for radio",mymessages_path%> |
 <%=link_to "playlists",playlists_path%>
 <%=link_to "mixers",mixers_path%>
 
 </nav>
+      <main>
     <%= yield %>
+      </main>
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <%=yield :js%>
   </body>

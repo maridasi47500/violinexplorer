@@ -3,11 +3,14 @@ class AudioController < ApplicationController
   def save
     @song=Song.find(params[:id])
     p params[:recording]
-    @song.recordings << Recording.new(myparams)
     
+    @recording=Recording.new(myparams)
+    @song.recordings << @recording
+    @vote=Vote.new
+    render layout: false
   end
   private
   def myparams
-    params.permit(:recording,:mycontent)
+    params.permit(:recording,:mycontent,:accompaniment_id,:partonly)
   end
 end

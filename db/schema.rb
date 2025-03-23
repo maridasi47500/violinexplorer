@@ -54,8 +54,14 @@ ActiveRecord::Schema.define(version: 2023_10_30_015658) do
     t.integer "song_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image"
-    t.string "name"
+
+  end
+
+  create_table "accompaniments", force: :cascade do |t|
+    t.integer "song_id"
+    t.string "filename"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "myfiles", force: :cascade do |t|
@@ -65,6 +71,8 @@ ActiveRecord::Schema.define(version: 2023_10_30_015658) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "type"
     t.text "mycontent"
+    t.integer "accompaniment_id"
+    t.boolean "partonly"
   end
 
   create_table "pieces", force: :cascade do |t|

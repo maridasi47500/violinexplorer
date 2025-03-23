@@ -1,2 +1,8 @@
-<h1>Audio#save</h1>
-<p>Find me in app/views/audio/save.html.erb</p>
+<span onclick="document.getElementById('overlay').style.display = 'none';">X</span>
+<%=form_with model: @vote do  |f|%>
+<%end%>
+<p>
+<%(1..5).each do |h|%>
+<span onclick="$.ajax({type:'post',url:'/votes',data:{vote:{myfile_id:<%=@recording.id%>, note: <%=h%>}}});document.getElementById('overlay').style.display = 'none';">&#11088</span>
+<%end%>
+</p>

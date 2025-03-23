@@ -1,5 +1,6 @@
 class Song < ApplicationRecord
 has_many :recordings
+has_many :accompaniments
 has_many :videos
 def self.numberrecordings
 select("*").select("songs.*, (select count(myfiles.id) from myfiles where songs.id = myfiles.song_id) as nbrec").group("songs.id").order("nbrec desc")
@@ -40,12 +41,15 @@ end
   end
   def myfile=(uploaded_io)
     myfilename=self.title.parameterize+self.artist.parameterize+"."+uploaded_io.original_filename.split(".")[-1]
+    self.accompaniments.push(Accompaniment.new(song: self, filename: myfilename))
+
     File.open(Rails.root.join('public', 'uploads', myfilename), 'wb') do |file|
       file.write(uploaded_io.read)
     end
   end
   def myfile2=(uploaded_io)
     myfilename=self.title.parameterize+self.artist.parameterize+"accompaniment."+uploaded_io.original_filename.split(".")[-1]
+    self.accompaniments.push(Accompaniment.new(song: self, filename: myfilename))
     File.open(Rails.root.join('public', 'uploads', myfilename), 'wb') do |file|
       file.write(uploaded_io.read)
     end
