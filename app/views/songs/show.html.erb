@@ -45,17 +45,6 @@
 
 
       </section>
-<%=link_to "all the recordings", recordings_song_path(@song.id)%>
-      <section class="sound-clips">
-        <%#@a=1%>
-        <%#@xx=Dir.glob(Rails.root.to_s+"/public/uploads/**recording**")%>
-        <%# @xx.select{|h|h.include?(@song.myfilename+"recording")}.each do |h|%>
-
-        <%#end%>
-
-
-      </section>
-    </div>
 
 
 <div class="accompaniment">
@@ -68,40 +57,43 @@
   Your browser does not support the audio tag.
 </audio>
 <%end%>
+<%if @song.title.downcase.include?("carnaval") and @song.title.downcase.include?("animaux")%>
+    <ul>
+        <li><a onclick="mysong1.currentTime=0;mysong1.play();return false;"  href="#">&#8987; I – Introduction et Marche royale du lion 🦁</a></li>
+        <li><a onclick="mysong1.currentTime=140;mysong1.play();return false;"  href="#">&#128019; II – Poules et Coqs 🐓</a></li>
+        <li><a onclick="mysong1.currentTime=200;mysong1.play();return false;"  href="#">&#128007; III – Hémiones (ou Animaux véloces) 🐎</a></li>
+        <li><a onclick="mysong1.currentTime=236;mysong1.play();return false;"  href="#">&#128034; IV – Tortues 🐢</a></li>
+        <li><a onclick="mysong1.currentTime=300;mysong1.play();return false;"  href="#">&#128024; V – L'Éléphant 🐘</a></li>
+        <li><a onclick="mysong1.currentTime=400;mysong1.play();return false;"  href="#">&#129432; VI – Kangourous 🦘</a></li>
+        <li><a onclick="mysong1.currentTime=451;mysong1.play();return false;"  href="#">&#128032; VII – Aquarium 🐠</a></li>
+        <li><a onclick="mysong1.currentTime=607;mysong1.play();return false;"  href="#">&#128054; VIII – Personnages à longues oreilles 🐶</a></li>
+        <li><a onclick="mysong1.currentTime=648;mysong1.play();return false;"  href="#">&#129417; IX – Le Coucou au fond des bois 🕊️</a></li>
+        <li><a onclick="mysong1.currentTime=766;mysong1.play();return false;"  href="#">&#128038; X – Volière 🦜</a></li>
+        <li><a onclick="mysong1.currentTime=857;mysong1.play();return false;"  href="#">&#127929; XI – Pianistes 🎹</a></li>
+        <li><a onclick="mysong1.currentTime=939;mysong1.play();return false;"  href="#">&#129426; XII – Fossiles 🦴</a></li>
+        <li><a onclick="mysong1.currentTime=1000;mysong1.play();return false;"  href="#">&#128031; XIII – Le Cygne 🦢</a></li>
+        <li><a onclick="mysong1.currentTime=1176;mysong1.play();return false;"  href="#">&#127880; XIV – Finale 🎉</a></li>
+    </ul>
+
+<%end%>
   <%=form_with model: @song do |form|%>
     <%=form.file_field :myfile%>
     <%=form.submit "ajouter le morceau"%>
   <%end%>
-  <label for="recordpart"> enregistrer la partie seule (avec  l'accompagnement)
-      <input id="recordpart" type="checkbox" name="recordpart" value="1" /></label>
+  <label hidden for="recordpart"> enregistrer la partie seule (avec  l'accompagnement)
+      <input hidden id="recordpart" type="checkbox" name="recordpart" value="1" /></label>
 
   <h4>accompagnement</h4>
-<%@song.accompaniments.each do |acc|%>
-  <label for="myaccomp<%=acc.id%>">enregistrer avec cet accompagnement de piano</label>
-  <input id="myaccomp<%=acc.id%>" type="radio" name="myaccomp" value="<%=acc.id%>" />
+<%@song.accompaniments.each_with_index do |acc,i|%>
+  <label for="myaccomp<%=acc.id%>" hidden>enregistrer avec cet accompagnement de piano</label>
+  <input hidden  id="myaccomp<%=acc.id%>" type="radio" name="myaccomp" value="<%=acc.id%>" />
+<span class="recordingnb">Accompagnement n°<%=i+1%></span>
 
    <audio  preload="none" id="mysong<%=acc.id%>" controls>
-  <source  src="/uploads/<%=acc.filename%>" id="myaccompaniment<%=acc.id%>" type="audio/mp3">
+  <source  src="/uploads/<%=acc.filename%>" id="myaccompaniment<%i+1%>" type="audio/mp3">
   Your browser does not support the audio tag.
 </audio>
 <%end%>
-  <%=form_with model: @song do |form|%>
-    <%=form.file_field :myfile2%>
-    <%=form.submit "ajouter l'accompagnement"%>
-  <%end%>
-  <h4>partie</h4>
-<%if Dir.glob(Rails.root.to_s+"/public/uploads/**partie**").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize)}%>
-
-
-   <audio  preload="none" id="mysong" controls>
-  <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
-  Your browser does not support the audio tag.
-</audio>
-<%end%>
-  <%=form_with model: @song do |form|%>
-    <%=form.file_field :myfile3%>
-    <%=form.submit "ajouter la partie"%>
-  <%end%>
 
 </div>
 
