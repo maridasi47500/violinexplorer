@@ -21,18 +21,8 @@
     <%= form.text_field :title %>
   </div>
 <div class="accompaniment">
-<%if Dir.glob(Rails.root.to_s+"/public/uploads/**.mp3").any?{|x|x.include?(@song.title.parameterize+@song.artist.parameterize+".mp3")}%>
-
-
-   <audio  preload="none" id="mysong" controls>
-  <source  src="/uploads/<%=@song.title.parameterize+@song.artist.parameterize%>.mp3" type="audio/mp3">
-  Your browser does not support the audio tag.
-</audio>
-<%end%>
-  <%=form_with model: @song do |form|%>
+ajouter un morceau
     <%=form.file_field :myfile%>
-    <%=form.submit "ajouter le morceau"%>
-  <%end%>
 </div>
 
 

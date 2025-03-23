@@ -62,6 +62,7 @@
 <%end%>
 <%if @song.title.downcase.include?("carnaval") and @song.title.downcase.include?("animaux")%>
     <ul>
+        <li><a onclick="mysong1.src='/uploads/<%=@song.accompaniments[0].filename%>';mysong1.currentTime=0;mysong1.play();return false;"  href="#">carnaval des animaux </a></li>
         <li><a onclick="mysong1.currentTime=0;mysong1.play();return false;"  href="#">&#8987; I – Introduction et Marche royale du lion 🦁</a></li>
         <li><a onclick="mysong1.currentTime=140;mysong1.play();return false;"  href="#">&#128019; II – Poules et Coqs 🐓</a></li>
         <li><a onclick="mysong1.currentTime=193;mysong1.play();return false;"  href="#">&#128007; III – Hémiones (ou Animaux véloces) 🐎</a></li>
@@ -78,9 +79,13 @@
         <li><a onclick="mysong1.currentTime=1176;mysong1.play();return false;"  href="#">&#127880; XIV – Finale 🎉</a></li>
     <br><br>
     <li>
-        <a onclick="playAudioAtTime(); return false;">hey moment aleatoire</a>
+        <a onclick="playAudioAtTime(); return false;">devinette : moment aleatoire carnaval des animaux </a>
     </li>
         <li onclick="div1.innerHTML=div1.dataset.textContent;return false;" id="div1"></li>
+    <br><br>
+<%Song.where("lower(title) like '%zelda%'").each do |x|%>
+        <li><a onclick="mysong1.src='/uploads/<%=x.accompaniments[0].filename%>';mysong1.currentTime=0;mysong1.play();return false;"  href="#"><%=x.artist%> - <%=x.title%> </a></li>
+<%end%>
     </ul>
 
 <%end%>
