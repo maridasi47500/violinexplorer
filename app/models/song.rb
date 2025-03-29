@@ -40,11 +40,13 @@ end
     title + " - " + artist
   end
   def myfile=(uploaded_io)
-    myfilename=self.title.parameterize+self.artist.parameterize+"."+uploaded_io.original_filename.split(".")[-1]
-    self.accompaniments.push(Accompaniment.new(song: self, filename: myfilename))
+    if uploaded_io != ""
+      myfilename=self.title.parameterize+self.artist.parameterize+"."+uploaded_io.original_filename.split(".")[-1]
+      self.accompaniments.push(Accompaniment.new(song: self, filename: myfilename))
 
-    File.open(Rails.root.join('public', 'uploads', myfilename), 'wb') do |file|
-      file.write(uploaded_io.read)
+      File.open(Rails.root.join('public', 'uploads', myfilename), 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
     end
   end
   def myfile2=(uploaded_io)
